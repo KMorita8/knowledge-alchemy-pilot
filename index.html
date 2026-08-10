@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knowledge Alchemy - 本をたどる冒険</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="focus-search">
+<div class="app">
+<header class="header">
+  <div class="header-top">
+    <div class="brand">Knowledge Alchemy　<ruby>本<rt>ほん</rt></ruby>をたどる<ruby>冒険<rt>ぼうけん</rt></ruby></div>
+    <div class="stepper" aria-label="冒険の進み方">
+      <div class="step-item active" data-step="1"><span class="num">1</span><span>ことばを<ruby>入<rt>い</rt></ruby>れる</span></div>
+      <div class="step-item" data-step="2"><span class="num">2</span><span><ruby>入口<rt>いりぐち</rt></ruby>の<ruby>本<rt>ほん</rt></ruby></span></div>
+      <div class="step-item" data-step="3"><span class="num">3</span><span>つながる<ruby>本<rt>ほん</rt></ruby></span></div>
+      <div class="step-item" data-step="4"><span class="num">4</span><span>これをかりたい！</span></div>
+    </div>
+  </div>
+  <div class="questbar">
+    <div class="quest-label">✦ <ruby>気<rt>き</rt></ruby>になることを<ruby>入<rt>い</rt></ruby>れよう</div>
+    <div class="query-wrap"><input id="queryInput" aria-label="気になることを入力するところ" value="アイヌのくらしや歴史を知りたい" placeholder="きになることを、ことばでもしつもんでもOK"></div>
+    <button id="searchButton" class="primary-search" type="button"><ruby>探<rt>さが</rt></ruby>してみる！</button>
+  </div>
+</header>
+
+<main class="main">
+  <section class="world" aria-label="本をたどる冒険マップ">
+    <img class="world-bg" src="assets/background_common.png" alt="草原と道がある共通の冒険マップ">
+    <div class="world-shade"></div>
+
+    
+    <svg id="connectionSvg" class="connection-svg" aria-hidden="true"></svg>
+    <div id="particleLayer" class="particle-layer"></div>
+    <div id="loader" class="loader"><div class="magic-orb"></div><div>しゅわわわ……<br><ruby>本<rt>ほん</rt></ruby>の<ruby>世界<rt>せかい</rt></ruby>を<ruby>探<rt>さが</rt></ruby>しているよ</div></div>
+    <div id="graph" class="graph" aria-live="polite"></div>
+    
+  </section>
+
+  <aside class="side">
+    <section class="panel guide-panel">
+      <h2>🧭 いまの<ruby>冒険<rt>ぼうけん</rt></ruby></h2>
+      <div id="guideMessage" class="guide-message"><ruby>白<rt>しろ</rt></ruby>い<ruby>入力欄<rt>にゅうりょくらん</rt></ruby>に、<ruby>気<rt>き</rt></ruby>になることを<ruby>入<rt>い</rt></ruby>れてね。</div>
+      <div id="nextHint" class="next-hint" style="display:none"></div>
+    </section>
+    <section id="journeyPanel" class="panel journey-panel" hidden>
+      <h3>🧵 <ruby>歩<rt>ある</rt></ruby>いた<ruby>道<rt>みち</rt></ruby></h3>
+      <div id="journeyTrail" class="journey-trail"></div>
+      <button id="returnToStartButton" class="return-start-button" type="button" hidden>
+        ↩ <ruby>入口<rt>いりぐち</rt></ruby>の<ruby>本<rt>ほん</rt></ruby>にもどる
+      </button>
+    </section>
+  </aside>
+</main>
+
+<footer class="footer">
+  <div class="guide-avatar"><div class="owl">🦉</div><div class="name"><ruby>本<rt>ほん</rt></ruby>の<ruby>案内人<rt>あんないにん</rt></ruby></div></div>
+  <div id="speech" class="speech" aria-live="polite">
+    <div id="speechText"><ruby>気<rt>き</rt></ruby>になることを、ことばでもしつもんでも<ruby>入<rt>い</rt></ruby>れてみてね！</div>
+    <button id="speechNext" class="speech-next" type="button" aria-label="つぎへ進む">つぎへ ▼</button>
+  </div>
+  
+</footer>
+</div>
+
+
+<!-- 実験開始前だけ表示する実験者用設定 -->
+<div id="experimentStartModal" class="modal open experiment-start" role="dialog" aria-modal="true" aria-labelledby="experimentStartTitle">
+  <div class="modal-card experiment-start-card">
+    <h2 id="experimentStartTitle">実験開始設定（実験者用）</h2>
+    <p>参加者IDを入力してから「実験を開始する」を押してください。児童が操作を始めると、この画面は表示されません。</p>
+    <label class="experiment-label" for="participantInput">参加者ID</label>
+    <input id="participantInput" class="experiment-input" value="P001" autocomplete="off">
+    <p class="experiment-note">例：P001、P002、P003</p>
+    <p id="datasetStatus" class="dataset-status">図書データを読み込んでいます……</p>
+    <button id="startExperimentButton" class="modal-btn confirm experiment-start-button" type="button">実験を開始する</button>
+  </div>
+</div>
+
+<!-- detail -->
+<div id="detailModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="modal-card">
+    <h2 id="detailTitle"></h2>
+    <div class="modal-book"><div id="detailCover" class="modal-cover">📘</div><div><p id="detailSummary"></p><p id="detailMeta"></p></div></div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" type="button" id="detailClose"><ruby>戻<rt>もど</rt></ruby>る</button>
+      <button class="modal-btn expand" type="button" id="detailExpand">この<ruby>本<rt>ほん</rt></ruby>からもっと<ruby>探<rt>さが</rt></ruby>す</button>
+      <button class="modal-btn final" type="button" id="detailFinal">これをかりたい！</button>
+    </div>
+  </div>
+</div>
+
+<!-- final confirmation -->
+<div id="confirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="modal-card">
+    <h2 id="confirmTitle">この<ruby>本<rt>ほん</rt></ruby>にする？</h2>
+    <p id="confirmBook"></p>
+    <div class="modal-actions" style="grid-template-columns:1fr 1.4fr">
+      <button class="modal-btn cancel" id="confirmCancel" type="button">もうすこし<ruby>探<rt>さが</rt></ruby>す</button>
+      <button class="modal-btn confirm" id="confirmYes" type="button">⭐ この<ruby>本<rt>ほん</rt></ruby>をかりたい！</button>
+    </div>
+  </div>
+</div>
+
+<!-- survey -->
+<div id="surveyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="surveyTitle">
+  <div class="modal-card">
+    <h2 id="surveyTitle"><ruby>冒険<rt>ぼうけん</rt></ruby>のおわりに</h2>
+    <div id="surveyContext" class="survey-context"></div>
+    <p id="surveyQuestion"></p>
+    <div id="surveyOptions" class="survey-options"></div>
+    <div id="surveyOther" class="survey-other"></div>
+  </div>
+</div>
+
+
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
