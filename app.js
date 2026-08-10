@@ -1424,25 +1424,213 @@ window.addEventListener('resize', () => {
 // 16. 終了画面
 // ------------------------------------------------------------
 
+// 操作ログから、実際に児童が見たり選んだりした本を取り出す。
+// displayed_nodes は「画面に出ただけ」の本なので、ここでは数えない。
+function getExploredBookIdsFromLogs() {
+  const ids = [];
+
+  function addBookId(id) {
+    if (id && books[id] && !ids.includes(id)) {
+      ids.push(id);
+    }
+  }
+
+  state.logs.forEach(record => {
+    if (record.event_type === 'initial_recommendation') {
+      addBookId(record.initial_book_id);
+    }
+
+    if (record.event_type === 'preview_event' || record.event_type === 'detail_event') {
+      addBookId(record.book_id);
+    }
+
+    if (record.event_type === 'expand_from_book' || record.event_type === 'return_to_initial_book') {
+      addBookId(record.to_book_id);
+    }
+
+    if (record.event_type === 'final_choice') {
+      addBookId(record.final_selected_book_id);
+    }
+  });
+
+  addBookId(state.finalBookId);
+  return ids;
+}
+
+// 見た本をNDCの上位分類ごとに数える。
+function makeExplorationSummary() {
+  const exploredIds = getExploredBookIdsFromLogs();
+  const counts = new Map();
+
+  exploredIds.forEach(id => {
+    const book = books[id];
+    const top = ndcTopNumber(book);
+    counts.set(top, (counts.get(top) || 0) + 1);
+  });
+
+  const fields = [...counts.entries()]
+    .map(([ndcNumber, count]) => ({
+      ndc: ndcData.find(item => item.n === ndcNumber) || ndcData[0],
+      count
+    }))
+    .sort((a, b) => b.count - a.count || a.ndc.n - b.ndc.n);
+
+  return {
+    exploredIds,
+    fields,
+    fieldCount: fields.length
+  };
+}
+
+// 分野別の本の数を、児童が見やすい横棒で表示する。
+function explorationBarsHtml(fields) {
+  if (!fields.length) {
+    return '<p class="reflection-empty">まだ<ruby>記録<rt>きろく</rt></ruby>がありません。</p>';
+  }
+
+  const maxCount = Math.max(...fields.map(item => item.count), 1);
+
+  return fields.slice(0, 5).map(item => {
+    const width = Math.max(18, Math.round((item.count / maxCount) * 100));
+
+    return `
+      <div class="reflection-row">
+        <div class="reflection-label">
+          <span class="reflection-icon">${item.ndc.icon}</span>
+          <span>${item.ndc.n}<ruby>類<rt>るい</rt></ruby> ${item.ndc.label}</span>
+          <strong>${item.count}<ruby>冊<rt>さつ</rt></ruby></strong>
+        </div>
+        <div class="reflection-track" aria-hidden="true">
+          <span class="reflection-fill" style="width:${width}%"></span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// 探索の経路を、長くなりすぎない範囲で賞状の下部に表示する。
+function explorationTrailHtml() {
+  const path = state.path.filter(id => books[id]);
+  if (!path.length) return '';
+
+  const visible = path.slice(0, 4);
+  const items = visible.map((id, index) => {
+    const book = books[id];
+    const arrow = index === 0 ? '' : '<span class="certificate-arrow">➡</span>';
+    return `${arrow}<span class="certificate-trail-book">${book.titleHtml}</span>`;
+  }).join('');
+
+  const more = path.length > visible.length
+    ? `<span class="certificate-more">ほか ${path.length - visible.length}<ruby>冊<rt>さつ</rt></ruby></span>`
+    : '';
+
+  return `
+    <div class="certificate-trail">
+      <span class="certificate-trail-title">🧵 <ruby>本<rt>ほん</rt></ruby>をたどった<ruby>道<rt>みち</rt></ruby></span>
+      <div class="certificate-trail-list">${items}${more}</div>
+    </div>
+  `;
+}
+
+function reflectionMessageHtml(summary) {
+  if (!summary.fields.length) {
+    return '<ruby>本<rt>ほん</rt></ruby>を1<ruby>冊<rt>さつ</rt></ruby>えらぶところまで、よくたどったね！';
+  }
+
+  const first = summary.fields[0].ndc;
+
+  if (summary.fieldCount === 1) {
+    return `こんかいは <strong>${first.n}<ruby>類<rt>るい</rt></ruby> ${first.label}</strong> の<ruby>本<rt>ほん</rt></ruby>を
+      ${summary.exploredIds.length}<ruby>冊<rt>さつ</rt></ruby><ruby>見<rt>み</rt></ruby>ながらたどったね！`;
+  }
+
+  return `こんかいは <strong>${summary.fieldCount}つの<ruby>分野<rt>ぶんや</rt></ruby></strong>の<ruby>本<rt>ほん</rt></ruby>を
+    ${summary.exploredIds.length}<ruby>冊<rt>さつ</rt></ruby><ruby>見<rt>み</rt></ruby>ながらたどったね！`;
+}
+
 function showStudyCompletion() {
   const book = books[state.finalBookId];
   const ndc = ndcInfo(book);
   const graph = el('graph');
+  const summary = makeExplorationSummary();
+  const subjects = book.subjects.slice(0, 3);
 
   graph.innerHTML = `
     <div class="finish-node">
       <section class="finish-card">
-        <h2>🎉 ${book.titleHtml}</h2>
-        <div class="finish-shelf">
-          📚 この<ruby>本<rt>ほん</rt></ruby>は<br>
-          <strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label} の<ruby>本棚<rt>ほんだな</rt></ruby></strong>へ！
+        <header class="certificate-header">
+          <div class="certificate-star" aria-hidden="true">★</div>
+          <div>
+            <div class="certificate-kicker"><ruby>本<rt>ほん</rt></ruby>のたんけんしょう</div>
+            <h2>きみの<ruby>本<rt>ほん</rt></ruby>さがしの<ruby>記録<rt>きろく</rt></ruby></h2>
+          </div>
+          <div class="certificate-star" aria-hidden="true">★</div>
+        </header>
+
+        <div class="certificate-grid">
+          <section class="certificate-book-panel">
+            <h3>📘 さいごにえらんだ<ruby>本<rt>ほん</rt></ruby></h3>
+
+            <div class="certificate-book-main">
+              ${coverHtml(book)}
+              <div class="certificate-book-info">
+                <div class="certificate-book-title">${book.titleHtml}</div>
+                ${book.isbn ? `<div class="certificate-isbn">ISBN ${escapeHtml(book.isbn)}</div>` : ''}
+                ${subjects.length ? `
+                  <div class="certificate-subject-title">この<ruby>本<rt>ほん</rt></ruby>の<ruby>手<rt>て</rt></ruby>がかり</div>
+                  <div class="certificate-subjects">
+                    ${subjects.map(subject => `<span>${escapeHtml(subject)}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <div class="finish-shelf">
+              <span>📚 <strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の<ruby>本棚<rt>ほんだな</rt></ruby></span>
+              <small>NDC ${escapeHtml(String(book.ndc || ndc.n))}</small>
+            </div>
+
+            <div class="finish-go-shelf">
+              ➡ この<ruby>画面<rt>がめん</rt></ruby>をもって、<ruby>図書館<rt>としょかん</rt></ruby>の
+              <strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> のコーナーへ<ruby>行<rt>い</rt></ruby>ってみよう！
+            </div>
+          </section>
+
+          <section class="certificate-reflection-panel">
+            <h3>✨ たんけんのふりかえり</h3>
+
+            <div class="reflection-stats">
+              <div><strong>${summary.exploredIds.length}</strong><span><ruby>見<rt>み</rt></ruby>た<ruby>本<rt>ほん</rt></ruby></span></div>
+              <div><strong>${summary.fieldCount}</strong><span>たどった<ruby>分野<rt>ぶんや</rt></ruby></span></div>
+            </div>
+
+            <div class="reflection-chart" aria-label="探索した本の分野別冊数">
+              ${explorationBarsHtml(summary.fields)}
+            </div>
+
+            <div class="reflection-message">
+              ${reflectionMessageHtml(summary)}
+            </div>
+          </section>
         </div>
-        <div class="finish-camera">📷 この<ruby>画面<rt>がめん</rt></ruby>をスクショしてね</div>
+
+        ${explorationTrailHtml()}
+
+        <div class="certificate-footer">
+          <span class="finish-camera">📷 この<ruby>画面<rt>がめん</rt></ruby>をスクショしてね</span>
+          <span class="certificate-finish-message">これで<ruby>今回<rt>こんかい</rt></ruby>の<ruby>案内<rt>あんない</rt></ruby>はおしまい！</span>
+        </div>
       </section>
     </div>
   `;
 
-  renderJourney();
+  const finishNode = graph.querySelector('.finish-node');
+  if (finishNode) {
+    trySetCover(finishNode, book);
+  }
+
+  // 終了画面では右側の操作案内を隠し、賞状を主役にする。
+  el('journeyPanel').hidden = true;
   setStep(4);
   setFocus(null);
 
@@ -1451,10 +1639,10 @@ function showStudyCompletion() {
   el('queryInput').readOnly = true;
 
   setGuide(
-    `よくできたね！ <strong>${book.titleHtml}</strong> は、<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の<ruby>本棚<rt>ほんだな</rt></ruby>を<ruby>探<rt>さが</rt></ruby>してみよう。<br>` +
-    `さあ、この<ruby>画面<rt>がめん</rt></ruby>をスクショして、<ruby>実際<rt>じっさい</rt></ruby>の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！<br>` +
-    `<strong>これで<ruby>今回<rt>こんかい</rt></ruby>の<ruby>案内<rt>あんない</rt></ruby>はおしまいだよ。</strong>`,
-    `${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label} の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`
+    `<strong>きみの<ruby>本<rt>ほん</rt></ruby>さがしの<ruby>記録<rt>きろく</rt></ruby>ができたよ！</strong><br>` +
+    `<strong>${book.titleHtml}</strong> は、<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の<ruby>本棚<rt>ほんだな</rt></ruby>にあるよ。<br>` +
+    `この<ruby>画面<rt>がめん</rt></ruby>をスクショして、<ruby>実際<rt>じっさい</rt></ruby>の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`,
+    `${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label} のコーナーへ<ruby>行<rt>い</rt></ruby>ってみよう！`
   );
 
   spawnSparkles(50);
