@@ -1639,10 +1639,11 @@ function showStudyCompletion() {
   el('queryInput').readOnly = true;
 
   setGuide(
-    `<strong>きみの<ruby>本<rt>ほん</rt></ruby>さがしの<ruby>記録<rt>きろく</rt></ruby>ができたよ！</strong><br>` +
-    `<strong>${book.titleHtml}</strong> は、<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の<ruby>本棚<rt>ほんだな</rt></ruby>にあるよ。<br>` +
-    `この<ruby>画面<rt>がめん</rt></ruby>をスクショして、<ruby>実際<rt>じっさい</rt></ruby>の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`,
-    `${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label} のコーナーへ<ruby>行<rt>い</rt></ruby>ってみよう！`
+  `<strong>きみの<ruby>本<rt>ほん</rt></ruby>さがしの<ruby>記録<rt>きろく</rt></ruby>ができたよ！</strong><br>` +
+  `この<ruby>画面<rt>がめん</rt></ruby>をスクショして、` +
+  `<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の` +
+  `<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`,
+  ''
   );
 
   spawnSparkles(50);
