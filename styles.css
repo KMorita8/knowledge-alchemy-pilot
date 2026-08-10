@@ -2156,3 +2156,243 @@ body.study-complete .speech {
     transition-duration: 0.01ms !important;
   }
 }
+/* =========================================================
+   PC表示の比率調整
+   - 本カード、文字、右案内を大きくする
+   - 背景は全体感を残す
+   ========================================================= */
+
+@media (min-width: 1000px) {
+
+  /* 全体の左右余白を少し減らす */
+  .main {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  /* 世界部分を画面いっぱいに使う */
+  .world {
+    min-height: 720px;
+  }
+
+  /* 背景は少しだけ大きくする
+     containのままだと余白が広く見えるため */
+  .world-bg {
+    object-fit: cover;
+    object-position: center;
+    transform: scale(0.96);
+  }
+
+  /* 本を置く範囲を少し中央へ寄せる */
+  .graph {
+    inset: 34px 48px;
+
+    grid-template-columns:
+      minmax(300px, 1fr)
+      minmax(470px, 560px)
+      minmax(300px, 1fr);
+
+    grid-template-rows:
+      minmax(220px, 1fr)
+      minmax(320px, auto)
+      minmax(220px, 1fr);
+
+    gap: 24px 34px;
+  }
+
+  /* =========================
+     中央の本
+     ========================= */
+
+  .center-node {
+    width: min(100%, 560px);
+  }
+
+  .book-body {
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px 20px;
+  }
+
+  .cover {
+    width: 120px;
+    height: 158px;
+  }
+
+  .book-title {
+    font-size: 30px;
+    line-height: 1.55;
+  }
+
+  .book-tag {
+    font-size: 15px;
+    padding: 6px 11px;
+  }
+
+  .fit-label {
+    font-size: 16px;
+  }
+
+  .fit-number {
+    font-size: 44px;
+  }
+
+  .fit-unit {
+    font-size: 19px;
+  }
+
+  .fit-note {
+    font-size: 15px;
+  }
+
+  .subject-kicker {
+    font-size: 17px;
+  }
+
+  .subject-chip {
+    font-size: 16px;
+    min-height: 40px;
+    padding: 7px 12px;
+  }
+
+  .shelf-info {
+    font-size: 17px;
+    padding: 10px 12px;
+  }
+
+  .btn {
+    min-height: 64px;
+    font-size: 19px;
+  }
+
+  .btn.main-next {
+    min-height: 70px;
+    font-size: 20px;
+  }
+
+  /* =========================
+     関連本4冊
+     ========================= */
+
+  .candidate-node {
+    width: min(100%, 350px);
+  }
+
+  .candidate-node .book-body {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 14px;
+    padding: 15px;
+  }
+
+  .candidate-node .cover {
+    width: 92px;
+    height: 122px;
+  }
+
+  .candidate-node .book-title {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .candidate-shelf {
+    font-size: 15px;
+    padding: 5px 9px;
+  }
+
+  .relation-tag {
+    font-size: 15px;
+    padding: 5px 9px;
+  }
+
+  .candidate-node .preview p {
+    font-size: 19px;
+    line-height: 1.8;
+  }
+
+  .mini-btn {
+    min-height: 58px;
+    font-size: 17px;
+  }
+
+  /* =========================
+     右側案内
+     ========================= */
+
+  .side {
+    gap: 14px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .panel h2,
+  .panel h3 {
+    font-size: 20px;
+  }
+
+  .guide-message {
+    font-size: 19px;
+    line-height: 1.85;
+  }
+
+  .journey-step {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .return-start-button {
+    min-height: 56px;
+    font-size: 17px;
+  }
+
+  /* =========================
+     フクロウ
+     ========================= */
+
+  .footer {
+    grid-template-columns: 90px minmax(0, 72vw);
+    padding: 12px 20px 14px;
+  }
+
+  .guide-avatar .owl {
+    font-size: 62px;
+  }
+
+  .speech {
+    min-height: 92px;
+    max-width: 72vw;
+    font-size: 20px;
+    line-height: 1.8;
+  }
+
+  .speech-next {
+    min-width: 66px;
+    min-height: 54px;
+    font-size: 16px;
+  }
+
+  /* 上部検索 */
+  .brand {
+    font-size: 30px;
+  }
+
+  .quest-label {
+    font-size: 18px;
+  }
+
+  #queryInput {
+    min-height: 66px;
+    font-size: 21px;
+  }
+
+  .primary-search {
+    min-height: 66px;
+    font-size: 20px;
+  }
+
+  .step-item {
+    font-size: 14px;
+  }
+}
