@@ -1763,3 +1763,506 @@ body.focus-preview .side {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   終了時の「本のたんけんしょう」
+   ========================================================= */
+.study-complete .main {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.study-complete .side {
+  display: none;
+}
+
+.study-complete .world {
+  min-height: 720px;
+}
+
+.study-complete .world-bg {
+  filter: brightness(0.62) saturate(0.78);
+}
+
+.study-complete .world-shade {
+  background: rgba(7, 18, 36, 0.22);
+}
+
+.finish-node {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: center;
+  z-index: 30;
+  width: min(96%, 1040px);
+  pointer-events: auto;
+}
+
+.finish-card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 28px 22px;
+  border: 5px solid #b78327;
+  border-radius: 24px;
+  background:
+    linear-gradient(rgba(255, 253, 240, 0.97), rgba(255, 248, 215, 0.97)),
+    repeating-linear-gradient(0deg, transparent 0 28px, rgba(181, 137, 51, 0.04) 29px 30px);
+  text-align: left;
+  box-shadow:
+    0 12px 0 rgba(100, 65, 17, 0.24),
+    0 0 0 5px rgba(255, 239, 165, 0.42),
+    0 26px 55px rgba(0, 0, 0, 0.34);
+}
+
+.finish-card::before,
+.finish-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 3px solid rgba(183, 131, 39, 0.22);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.finish-card::before {
+  left: -46px;
+  top: -48px;
+}
+
+.finish-card::after {
+  right: -46px;
+  bottom: -48px;
+}
+
+.certificate-header {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.certificate-star {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffe58a;
+  color: #b27316;
+  font-size: 25px;
+  box-shadow: inset 0 0 0 3px #d7a43b;
+}
+
+.certificate-kicker {
+  margin-bottom: 2px;
+  color: #7d581d;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.finish-card .certificate-header h2 {
+  margin: 0;
+  color: #26364f;
+  font-size: clamp(27px, 3vw, 38px);
+  line-height: 1.45;
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 18px;
+}
+
+.certificate-book-panel,
+.certificate-reflection-panel {
+  min-width: 0;
+  padding: 18px;
+  border: 3px solid #b7a47a;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.certificate-book-panel {
+  border-color: #d3a64a;
+  background: linear-gradient(145deg, #fff9dd, #fffef7);
+}
+
+.certificate-reflection-panel {
+  border-color: #9ab3d2;
+  background: linear-gradient(145deg, #f7fbff, #eef6ff);
+}
+
+.certificate-book-panel h3,
+.certificate-reflection-panel h3 {
+  margin: 0 0 14px;
+  color: #243754;
+  font-size: 21px;
+  line-height: 1.6;
+}
+
+.certificate-book-main {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+
+.certificate-book-main .cover {
+  width: 112px;
+  height: 150px;
+  border-radius: 12px;
+}
+
+.certificate-book-title {
+  color: #1f2e46;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.65;
+}
+
+.certificate-isbn {
+  margin-top: 6px;
+  color: #66748a;
+  font-size: 13px;
+}
+
+.certificate-subject-title {
+  margin-top: 12px;
+  color: #76571d;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.certificate-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.certificate-subjects span {
+  padding: 5px 8px;
+  border: 1px solid #9dc2e5;
+  border-radius: 999px;
+  background: #edf6ff;
+  color: #2b5687;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.finish-shelf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 16px 0 10px;
+  padding: 12px 14px;
+  border: 3px solid #3d73b6;
+  border-radius: 14px;
+  background: #edf6ff;
+  color: #214c82;
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 900;
+}
+
+.finish-shelf small {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: #5f7090;
+}
+
+.finish-go-shelf {
+  padding: 12px 14px;
+  border-radius: 13px;
+  background: #fff0ac;
+  color: #5d4515;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.8;
+}
+
+.reflection-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.reflection-stats > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 2px solid #b3c6dc;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.reflection-stats strong {
+  color: #305e9d;
+  font-size: 31px;
+  line-height: 1;
+}
+
+.reflection-stats span {
+  color: #405573;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.reflection-chart {
+  display: grid;
+  gap: 11px;
+}
+
+.reflection-row {
+  display: grid;
+  gap: 5px;
+}
+
+.reflection-label {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  color: #304a6e;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.reflection-icon {
+  font-size: 20px;
+}
+
+.reflection-label strong {
+  white-space: nowrap;
+  color: #244f86;
+  font-size: 13px;
+}
+
+.reflection-track {
+  height: 17px;
+  overflow: hidden;
+  border: 1px solid #b7c8dd;
+  border-radius: 999px;
+  background: #dce8f3;
+  box-shadow: inset 0 2px 4px rgba(24, 52, 86, 0.10);
+}
+
+.reflection-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #69bddf, #5a8ce3, #7766d5);
+}
+
+.reflection-message {
+  margin-top: 15px;
+  padding: 11px 13px;
+  border: 2px solid #d8b552;
+  border-radius: 12px;
+  background: #fff7cd;
+  color: #5d4a20;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.8;
+}
+
+.reflection-empty {
+  margin: 0;
+  color: #65758d;
+  font-size: 14px;
+}
+
+.certificate-trail {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 2px dashed #bba66f;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.certificate-trail-title {
+  display: block;
+  margin-bottom: 8px;
+  color: #70551f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.certificate-trail-list {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.certificate-trail-book,
+.certificate-more {
+  flex: 0 0 auto;
+  max-width: 190px;
+  padding: 7px 9px;
+  overflow: hidden;
+  border: 1px solid #a9c2de;
+  border-radius: 10px;
+  background: #eef6ff;
+  color: #2d537f;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.certificate-more {
+  border-color: #d6ba65;
+  background: #fff3bc;
+  color: #684e18;
+}
+
+.certificate-arrow {
+  flex: 0 0 auto;
+  color: #cf8f23;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.certificate-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.finish-camera {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: #ffe486;
+  color: #5a4318;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.certificate-finish-message {
+  color: #605336;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+@media (max-width: 850px) {
+  .study-complete .world {
+    height: auto;
+    min-height: 920px;
+  }
+
+  .finish-node {
+    width: min(96%, 720px);
+  }
+
+  .certificate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .finish-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .study-complete .world {
+    min-height: 1080px;
+  }
+
+  .finish-node {
+    width: 97%;
+  }
+
+  .finish-card {
+    padding: 15px 13px;
+    border-width: 4px;
+  }
+
+  .certificate-header {
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    gap: 7px;
+  }
+
+  .certificate-star {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+  }
+
+  .certificate-kicker {
+    font-size: 13px;
+  }
+
+  .finish-card .certificate-header h2 {
+    font-size: 25px;
+  }
+
+  .certificate-book-panel,
+  .certificate-reflection-panel {
+    padding: 14px;
+  }
+
+  .certificate-book-panel h3,
+  .certificate-reflection-panel h3 {
+    font-size: 18px;
+  }
+
+  .certificate-book-main {
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 11px;
+  }
+
+  .certificate-book-main .cover {
+    width: 86px;
+    height: 116px;
+  }
+
+  .certificate-book-title {
+    font-size: 18px;
+  }
+
+  .finish-shelf {
+    display: block;
+    font-size: 17px;
+  }
+
+  .finish-shelf small {
+    display: block;
+    margin-top: 3px;
+  }
+
+  .finish-go-shelf,
+  .reflection-message {
+    font-size: 15px;
+  }
+
+  .reflection-label {
+    font-size: 13px;
+  }
+
+  .reflection-stats strong {
+    font-size: 27px;
+  }
+
+  .certificate-trail-book,
+  .certificate-more {
+    max-width: 150px;
+  }
+}
