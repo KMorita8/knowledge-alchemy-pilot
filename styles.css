@@ -1,29 +1,37 @@
+/* =========================================================
+   Knowledge Alchemy
+   styles.css
+   PC / Tablet / Smartphone
+   ========================================================= */
+
+
+/* =========================================================
+   1. 共通変数
+   ========================================================= */
+
 :root {
   --navy: #0d2244;
   --navy-2: #173a70;
-  --navy-3: #244e86;
+  --navy-3: #2e5d99;
 
   --cream: #fff9e7;
   --paper: #fffdf5;
   --ink: #1d2b43;
 
   --gold: #f7c84b;
-  --gold-light: #ffdf79;
+  --gold-light: #ffe58a;
 
   --blue: #3476d7;
-  --blue-light: #64a8ff;
+  --blue-light: #72b6ff;
 
   --line: #ffe778;
-  --muted: #63718a;
 
-  --shadow: rgba(5, 13, 28, 0.28);
-
-  --dialogue-width: 70vw;
+  --dialogue-width: 78vw;
 }
 
 
 /* =========================================================
-   1. 基本設定
+   2. 基本設定
    ========================================================= */
 
 * {
@@ -33,6 +41,7 @@
 html,
 body {
   margin: 0;
+  width: 100%;
   min-height: 100%;
 }
 
@@ -79,6 +88,15 @@ rt {
   font-weight: 600;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+
+/* =========================================================
+   3. アプリ全体
+   ========================================================= */
+
 .app {
   min-height: 100vh;
 
@@ -88,11 +106,18 @@ rt {
     auto
     minmax(0, 1fr)
     auto;
+
+  background:
+    linear-gradient(
+      180deg,
+      #10264b,
+      #08152b
+    );
 }
 
 
 /* =========================================================
-   2. ヘッダー
+   4. ヘッダー
    ========================================================= */
 
 .header {
@@ -100,15 +125,16 @@ rt {
   z-index: 20;
 
   padding:
-    14px
-    clamp(14px, 2vw, 30px);
+    12px
+    22px
+    14px;
 
   color: #ffffff;
 
   background:
     linear-gradient(
       180deg,
-      #2f5791,
+      #32629f,
       #173967
     );
 
@@ -126,16 +152,16 @@ rt {
   align-items: center;
   justify-content: space-between;
 
-  gap: 14px;
+  gap: 18px;
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .brand {
   flex: 0 0 auto;
 
   font-size:
-    clamp(25px, 2.1vw, 34px);
+    clamp(26px, 1.8vw, 32px);
 
   font-weight: 900;
 
@@ -150,7 +176,7 @@ rt {
 
 
 /* =========================================================
-   3. 進行表示
+   5. 進行表示
    ========================================================= */
 
 .stepper {
@@ -158,7 +184,9 @@ rt {
 
   align-items: center;
 
-  gap: 8px;
+  justify-content: flex-end;
+
+  gap: 7px;
 
   min-width: 0;
 
@@ -180,40 +208,40 @@ rt {
 
   flex: 0 0 auto;
 
-  min-height: 42px;
+  min-height: 38px;
 
   padding:
-    8px
-    12px;
+    6px
+    11px;
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.28);
+    rgba(255, 255, 255, 0.30);
 
   border-radius: 999px;
 
   background:
-    rgba(0, 0, 0, 0.13);
+    rgba(0, 0, 0, 0.12);
 
   color: #dce7fb;
 
   font-size: 13px;
+  font-weight: 800;
 }
 
 .step-item .num {
   display: grid;
-
   place-items: center;
 
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
 
   border-radius: 50%;
 
   background:
-    rgba(255, 255, 255, 0.14);
+    rgba(255, 255, 255, 0.15);
 
-  font-size: 13px;
+  font-size: 12px;
 
   font-weight: 900;
 }
@@ -227,7 +255,7 @@ rt {
 
   box-shadow:
     0 0 0 2px
-    rgba(255, 226, 102, 0.18);
+    rgba(255, 226, 102, 0.17);
 }
 
 .step-item.done {
@@ -242,31 +270,25 @@ rt {
 
 
 /* =========================================================
-   4. 検索欄
+   6. 検索部分
    ========================================================= */
 
 .questbar {
+  width: 100%;
+
   display: grid;
 
   grid-template-columns:
-    auto
-    minmax(420px, 1fr)
-    auto;
+    250px
+    minmax(0, 1fr)
+    170px;
 
-  align-items: end;
+  align-items: center;
 
-  gap: 14px;
-
-  width: 100%;
-
-  max-width: 1500px;
-
-  margin: 0 auto;
+  gap: 12px;
 }
 
 .quest-label {
-  align-self: center;
-
   color: #fff2bd;
 
   font-size: 17px;
@@ -278,6 +300,8 @@ rt {
 
 .query-wrap {
   position: relative;
+
+  min-width: 0;
 }
 
 .query-wrap::before {
@@ -285,7 +309,7 @@ rt {
 
   position: absolute;
 
-  left: 17px;
+  left: 16px;
   top: 50%;
 
   z-index: 2;
@@ -295,19 +319,20 @@ rt {
 
   color: #3e78ce;
 
-  font-size: 24px;
+  font-size: 23px;
 }
 
 #queryInput {
   width: 100%;
 
-  min-height: 64px;
+  height: 56px;
+  min-height: 56px;
 
   padding:
-    14px
-    18px
-    14px
-    52px;
+    10px
+    16px
+    10px
+    48px;
 
   border:
     3px solid #293248;
@@ -326,25 +351,24 @@ rt {
 
   box-shadow:
     inset 0 -3px 0 #e7ddc2,
-    0 3px 0
-    rgba(0, 0, 0, 0.18);
+    0 3px 0 rgba(0, 0, 0, 0.18);
 }
 
 #queryInput:focus {
   border-color: #7ad9ff;
 
   box-shadow:
-    0 0 0 4px
-    rgba(91, 198, 242, 0.22),
+    0 0 0 4px rgba(91, 198, 242, 0.22),
     inset 0 -3px 0 #e7ddc2;
 }
 
 .primary-search {
-  min-height: 64px;
+  height: 56px;
+  min-height: 56px;
 
   padding:
-    12px
-    26px;
+    8px
+    16px;
 
   border:
     3px solid #6d521e;
@@ -359,13 +383,11 @@ rt {
 
   color: #4a3515;
 
-  font-size: 19px;
+  font-size: 18px;
 
   font-weight: 900;
 
   cursor: pointer;
-
-  white-space: nowrap;
 
   box-shadow:
     0 5px 0 #8c6826,
@@ -382,14 +404,14 @@ rt {
 }
 
 .primary-search:disabled {
-  opacity: 0.55;
+  opacity: 0.58;
 
   cursor: wait;
 }
 
 
 /* =========================================================
-   5. メイン画面
+   7. メイン
    ========================================================= */
 
 .main {
@@ -399,21 +421,24 @@ rt {
 
   grid-template-columns:
     minmax(0, 1fr)
-    320px;
+    300px;
 
-  gap: 14px;
+  gap: 10px;
 
-  padding: 14px;
+  padding:
+    8px
+    10px;
 }
 
 
 /* =========================================================
-   6. 冒険マップ
+   8. 世界
    ========================================================= */
 
 .world {
   position: relative;
 
+  min-width: 0;
   min-height: 650px;
 
   overflow: hidden;
@@ -423,7 +448,7 @@ rt {
   border:
     4px solid #07152d;
 
-  border-radius: 22px;
+  border-radius: 18px;
 
   background: #1680ae;
 
@@ -446,7 +471,7 @@ rt {
   object-position: center;
 
   filter:
-    saturate(0.94)
+    saturate(0.95)
     brightness(0.98);
 }
 
@@ -462,40 +487,40 @@ rt {
   background:
     radial-gradient(
       circle at 50% 48%,
-      rgba(255, 255, 255, 0.04)
-      0 38%,
-      rgba(7, 18, 36, 0.12)
-      84%,
-      rgba(7, 18, 36, 0.2)
+      rgba(255, 255, 255, 0.03)
+      0 40%,
+      rgba(7, 18, 36, 0.10)
+      82%,
+      rgba(7, 18, 36, 0.18)
       100%
     );
 }
 
 
 /* =========================================================
-   7. 本を配置するエリア
+   9. 本配置エリア
    ========================================================= */
 
 .graph {
   position: absolute;
 
   inset:
-    24px
-    28px;
+    16px
+    20px;
 
   z-index: 3;
 
   display: grid;
 
   grid-template-columns:
-    minmax(240px, 1fr)
-    minmax(390px, 500px)
-    minmax(240px, 1fr);
+    minmax(210px, 1fr)
+    minmax(370px, 440px)
+    minmax(210px, 1fr);
 
   grid-template-rows:
-    minmax(210px, 1fr)
-    minmax(260px, auto)
-    minmax(210px, 1fr);
+    minmax(145px, 1fr)
+    minmax(235px, auto)
+    minmax(145px, 1fr);
 
   grid-template-areas:
     "c0 . c1"
@@ -506,15 +531,15 @@ rt {
   justify-items: center;
 
   gap:
-    18px
-    24px;
+    10px
+    18px;
 
   pointer-events: none;
 }
 
 
 /* =========================================================
-   8. 本同士の線
+   10. 接続線
    ========================================================= */
 
 .connection-svg {
@@ -526,8 +551,6 @@ rt {
 
   width: 100%;
   height: 100%;
-
-  overflow: visible;
 
   pointer-events: none;
 }
@@ -562,7 +585,30 @@ rt {
 
 
 /* =========================================================
-   9. 中央の本
+   11. 本カード共通
+   ========================================================= */
+
+.book-card {
+  overflow: hidden;
+
+  border:
+    3px solid #26344e;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255, 252, 236, 0.97);
+
+  color: #1d2b43;
+
+  box-shadow:
+    0 7px 0 rgba(31, 44, 70, 0.24),
+    0 14px 22px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   12. 中央本
    ========================================================= */
 
 .center-node {
@@ -571,29 +617,9 @@ rt {
   z-index: 5;
 
   width:
-    min(100%, 500px);
+    min(100%, 445px);
 
   pointer-events: auto;
-}
-
-.book-card {
-  overflow: hidden;
-
-  border:
-    3px solid #26344e;
-
-  border-radius: 20px;
-
-  background:
-    rgba(255, 252, 236, 0.97);
-
-  color: #1d2b43;
-
-  box-shadow:
-    0 8px 0
-    rgba(31, 44, 70, 0.26),
-    0 15px 24px
-    rgba(0, 0, 0, 0.18);
 }
 
 .book-card.center {
@@ -603,56 +629,39 @@ rt {
     rgba(255, 244, 198, 0.98);
 
   box-shadow:
-    0 10px 0
-    rgba(116, 78, 18, 0.22),
-    0 0 58px
-    rgba(255, 224, 107, 0.34),
-    0 22px 38px
-    rgba(0, 0, 0, 0.24);
+    0 9px 0 rgba(116, 78, 18, 0.22),
+    0 0 50px rgba(255, 224, 107, 0.30),
+    0 20px 34px rgba(0, 0, 0, 0.22);
 
   animation:
     centerQuestEntry
-    0.95s
-    cubic-bezier(
-      0.17,
-      0.84,
-      0.24,
-      1.12
-    )
+    0.9s
+    cubic-bezier(.17, .84, .24, 1.12)
     both,
 
     floatCenter
     3.4s
     ease-in-out
-    1.05s
+    1s
     infinite
     alternate;
 }
 
 @keyframes centerQuestEntry {
-
   0% {
     opacity: 0;
 
     transform:
-      translateY(52px)
-      scale(0.48)
-      rotate(-2deg);
+      translateY(40px)
+      scale(0.6);
   }
 
-  60% {
+  70% {
     opacity: 1;
 
     transform:
-      translateY(-12px)
-      scale(1.08)
-      rotate(0.8deg);
-  }
-
-  80% {
-    transform:
-      translateY(5px)
-      scale(0.98);
+      translateY(-6px)
+      scale(1.03);
   }
 
   100% {
@@ -663,46 +672,44 @@ rt {
 }
 
 @keyframes floatCenter {
-
   from {
     translate: 0 0;
   }
 
   to {
-    translate: 0 -6px;
+    translate: 0 -5px;
   }
 }
 
 
 /* =========================================================
-   10. 書影・本タイトル
+   13. 書影
    ========================================================= */
 
 .book-body {
   display: grid;
 
   grid-template-columns:
-    100px
+    84px
     minmax(0, 1fr);
 
-  gap: 15px;
+  gap: 13px;
 
   padding:
-    16px
-    17px;
+    12px
+    14px;
 }
 
 .cover {
-  width: 100px;
-  height: 132px;
+  width: 84px;
+  height: 110px;
 
   overflow: hidden;
 
   display: grid;
-
   place-items: center;
 
-  border-radius: 15px;
+  border-radius: 14px;
 
   background:
     linear-gradient(
@@ -716,7 +723,7 @@ rt {
     inset 0 0 0 1px
     rgba(255, 255, 255, 0.4),
 
-    0 7px 16px
+    0 6px 14px
     rgba(30, 55, 100, 0.22);
 }
 
@@ -733,8 +740,7 @@ rt {
   display: block;
 }
 
-.cover.has-image
-.cover-fallback {
+.cover.has-image .cover-fallback {
   display: none;
 }
 
@@ -769,11 +775,6 @@ rt {
       rgba(255, 255, 255, 0.45)
       47% 53%,
       transparent 54%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.18),
-      rgba(255, 255, 255, 0.05)
     );
 }
 
@@ -787,19 +788,23 @@ rt {
 
   color: #fff3a1;
 
-  font-size: 22px;
+  font-size: 20px;
 }
+
+
+/* =========================================================
+   14. タイトル
+   ========================================================= */
 
 .book-title {
   margin:
     0
     0
-    8px;
+    7px;
 
-  font-size:
-    clamp(24px, 1.6vw, 30px);
+  font-size: 22px;
 
-  line-height: 1.55;
+  line-height: 1.45;
 
   font-weight: 900;
 }
@@ -807,9 +812,9 @@ rt {
 .book-meta {
   color: #5f6b7f;
 
-  font-size: 15px;
+  font-size: 14px;
 
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .book-tag {
@@ -817,11 +822,11 @@ rt {
 
   align-items: center;
 
-  margin-top: 7px;
+  margin-top: 5px;
 
   padding:
-    5px
-    10px;
+    4px
+    8px;
 
   border:
     1px solid #9b742c;
@@ -837,7 +842,7 @@ rt {
 
 
 /* =========================================================
-   11. ぴったり度
+   15. 段階表示
    ========================================================= */
 
 .center-stage {
@@ -848,29 +853,34 @@ rt {
   opacity: 0;
 
   transform:
-    translateY(7px);
+    translateY(6px);
 
   transition:
-    max-height 0.6s ease,
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    margin 0.5s ease;
+    max-height 0.55s ease,
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    margin 0.45s ease;
 }
 
 .center-stage.visible {
-  max-height: 280px;
+  max-height: 260px;
 
   opacity: 1;
 
   transform: none;
 
-  margin-top: 8px;
+  margin-top: 6px;
 }
+
+
+/* =========================================================
+   16. ぴったり度
+   ========================================================= */
 
 .fit-stage {
   padding:
     0
-    17px;
+    14px;
 }
 
 .fit-card {
@@ -878,20 +888,20 @@ rt {
 
   grid-template-columns:
     auto
-    1fr;
+    minmax(0, 1fr);
 
   align-items: center;
 
-  gap: 13px;
+  gap: 9px;
 
   padding:
-    11px
-    13px;
+    7px
+    9px;
 
   border:
     2px solid #d7a52b;
 
-  border-radius: 14px;
+  border-radius: 13px;
 
   background:
     linear-gradient(
@@ -907,7 +917,7 @@ rt {
 
   align-items: baseline;
 
-  gap: 4px;
+  gap: 3px;
 
   white-space: nowrap;
 }
@@ -915,7 +925,7 @@ rt {
 .fit-label {
   color: #735614;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 900;
 }
@@ -923,7 +933,7 @@ rt {
 .fit-number {
   color: #e35a47;
 
-  font-size: 38px;
+  font-size: 34px;
 
   line-height: 1;
 
@@ -933,13 +943,13 @@ rt {
 .fit-unit {
   color: #9a5b1d;
 
-  font-size: 17px;
+  font-size: 15px;
 
   font-weight: 900;
 }
 
 .fit-track {
-  height: 13px;
+  height: 11px;
 
   overflow: hidden;
 
@@ -967,41 +977,40 @@ rt {
     width 1.1s ease;
 }
 
-.fit-stage.visible
-.fit-fill {
+.fit-stage.visible .fit-fill {
   width:
     var(--fit-score);
 }
 
 .fit-note {
-  margin-top: 5px;
+  margin-top: 3px;
 
   color: #6a6880;
 
-  font-size: 14px;
+  font-size: 12px;
 
-  line-height: 1.5;
+  line-height: 1.4;
 
   font-weight: 800;
 }
 
 
 /* =========================================================
-   12. 本の手がかり
+   17. 本の手がかり
    ========================================================= */
 
 .subject-stage {
   padding:
     0
-    17px;
+    14px;
 }
 
 .subject-kicker {
   color: #6e5b34;
 
-  font-size: 15px;
+  font-size: 14px;
 
-  line-height: 1.55;
+  line-height: 1.45;
 
   font-weight: 900;
 }
@@ -1011,9 +1020,9 @@ rt {
 
   flex-wrap: wrap;
 
-  gap: 8px;
+  gap: 5px;
 
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .subject-chip {
@@ -1021,11 +1030,11 @@ rt {
 
   align-items: center;
 
-  min-height: 36px;
+  min-height: 30px;
 
   padding:
-    7px
-    11px;
+    4px
+    8px;
 
   border:
     1px solid #9fc4ed;
@@ -1036,7 +1045,7 @@ rt {
 
   color: #28588f;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 900;
 }
@@ -1046,39 +1055,39 @@ rt {
 
   align-items: center;
 
-  gap: 8px;
+  gap: 6px;
 
   flex-wrap: wrap;
 
-  margin-top: 10px;
+  margin-top: 6px;
 
   padding:
-    9px
-    11px;
+    6px
+    8px;
 
   border:
     2px solid #9bb8d8;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: #eef6ff;
 
   color: #234e83;
 
-  font-size: 15px;
+  font-size: 14px;
 
-  line-height: 1.6;
+  line-height: 1.5;
 
   font-weight: 900;
 }
 
 .shelf-icon {
-  font-size: 21px;
+  font-size: 18px;
 }
 
 
 /* =========================================================
-   13. 中央本のボタン
+   18. 中央本ボタン
    ========================================================= */
 
 .center-actions {
@@ -1088,22 +1097,22 @@ rt {
     1fr
     1fr;
 
-  gap: 10px;
+  gap: 7px;
 
   padding:
     0
-    17px
-    17px;
+    14px
+    12px;
 
   opacity: 0;
 
   transform:
-    translateY(8px);
+    translateY(6px);
 
   pointer-events: none;
 
   transition:
-    0.4s;
+    0.35s;
 }
 
 .center-actions.visible {
@@ -1115,18 +1124,18 @@ rt {
 }
 
 .btn {
-  min-height: 58px;
+  min-height: 46px;
 
   padding:
-    9px
-    11px;
+    6px
+    8px;
 
   border:
     2px solid #2b3854;
 
-  border-radius: 11px;
+  border-radius: 10px;
 
-  font-size: 17px;
+  font-size: 16px;
 
   font-weight: 900;
 
@@ -1134,7 +1143,7 @@ rt {
 
   box-shadow:
     0 3px 0
-    rgba(41, 55, 83, 0.24);
+    rgba(41, 55, 83, 0.22);
 }
 
 .btn.info {
@@ -1149,7 +1158,7 @@ rt {
   grid-column:
     1 / -1;
 
-  min-height: 64px;
+  min-height: 50px;
 
   background:
     linear-gradient(
@@ -1161,43 +1170,33 @@ rt {
 
   border-color: #1c4f9d;
 
-  font-size: 18px;
-
-  box-shadow:
-    0 6px 0 #1d4d95,
-    0 0 28px
-    rgba(67, 137, 230, 0.34);
+  font-size: 17px;
 }
 
 
 /* =========================================================
-   14. 関連本4冊
+   19. 関連本
    ========================================================= */
 
 .candidate-node {
   z-index: 8;
 
   width:
-    min(100%, 320px);
+    min(100%, 260px);
 
   pointer-events: auto;
 
   opacity: 0;
 
   transform:
-    translateY(34px)
-    scale(0.72);
+    translateY(28px)
+    scale(0.75);
 
   transition:
-    opacity 0.8s ease,
+    opacity 0.75s ease,
     transform
-    0.8s
-    cubic-bezier(
-      0.18,
-      0.84,
-      0.24,
-      1.12
-    );
+    0.75s
+    cubic-bezier(.18, .84, .24, 1.12);
 }
 
 .candidate-node.show {
@@ -1211,19 +1210,18 @@ rt {
     candidateFloat
     4.2s
     ease-in-out
-    1.1s
+    1s
     infinite
     alternate;
 }
 
 @keyframes candidateFloat {
-
   from {
     translate: 0 0;
   }
 
   to {
-    translate: 0 -6px;
+    translate: 0 -5px;
   }
 }
 
@@ -1243,88 +1241,69 @@ rt {
   grid-area: c3;
 }
 
-.candidate-node
-.book-body {
+.candidate-node .book-body {
   grid-template-columns:
-    82px
+    65px
     minmax(0, 1fr);
 
-  gap: 13px;
+  gap: 9px;
 
-  padding: 14px;
+  padding: 9px;
 }
 
-.candidate-node
-.cover {
-  width: 82px;
-
-  height: 110px;
+.candidate-node .cover {
+  width: 65px;
+  height: 85px;
 }
 
-.candidate-node
-.book-title {
-  font-size: 20px;
+.candidate-node .book-title {
+  font-size: 17px;
 
-  line-height: 1.55;
-
-  font-weight: 900;
+  line-height: 1.4;
 }
 
-.candidate-shelf {
+.candidate-shelf,
+.relation-tag {
   display: inline-flex;
 
   align-items: center;
 
-  margin-top: 5px;
+  margin-top: 4px;
 
   padding:
-    5px
-    8px;
-
-  border:
-    1px solid #aac8e8;
+    3px
+    6px;
 
   border-radius: 999px;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  font-weight: 800;
+}
+
+.candidate-shelf {
+  border:
+    1px solid #aac8e8;
 
   background: #edf5ff;
 
   color: #315a8c;
-
-  font-size: 14px;
-
-  line-height: 1.5;
-
-  font-weight: 800;
 }
 
 .relation-tag {
-  display: inline-flex;
-
-  margin-top: 6px;
-
-  padding:
-    5px
-    8px;
-
   border:
     1px solid #a7c7f3;
-
-  border-radius: 999px;
 
   background: #e4efff;
 
   color: #2d5795;
-
-  font-size: 14px;
-
-  line-height: 1.5;
-
-  font-weight: 800;
 }
 
 
 /* =========================================================
-   15. 関連本のプレビュー
+   20. 関連本プレビュー
    ========================================================= */
 
 .candidate-node.preview-open {
@@ -1333,11 +1312,10 @@ rt {
   animation-play-state: paused;
 
   transform:
-    scale(1.03);
+    scale(1.02);
 }
 
-.candidate-node.preview-open
-.book-card {
+.candidate-node.preview-open .book-card {
   overflow: visible;
 
   background: #f8fcff;
@@ -1348,17 +1326,17 @@ rt {
     0 12px 0
     rgba(45, 83, 132, 0.22),
 
-    0 22px 42px
-    rgba(0, 0, 0, 0.32);
+    0 20px 36px
+    rgba(0, 0, 0, 0.28);
 }
 
 .preview {
   display: none;
 
   padding:
-    10px
-    12px
-    12px;
+    8px
+    9px
+    9px;
 
   border-top:
     1px dashed #b8c6d9;
@@ -1367,23 +1345,21 @@ rt {
     rgba(248, 252, 255, 0.99);
 }
 
-.candidate-node.preview-open
-.preview {
+.candidate-node.preview-open .preview {
   display: block;
 }
 
-.candidate-node
-.preview p {
+.candidate-node .preview p {
   margin:
-    4px
+    2px
     0
-    10px;
+    7px;
 
   color: #53627a;
 
-  font-size: 18px;
+  font-size: 16px;
 
-  line-height: 1.85;
+  line-height: 1.55;
 
   font-weight: 650;
 }
@@ -1395,30 +1371,29 @@ rt {
     1fr
     1fr;
 
-  gap: 8px;
+  gap: 6px;
 }
 
-.preview-actions
-.expand {
+.preview-actions .expand {
   grid-column:
     1 / -1;
 }
 
 .mini-btn {
-  min-height: 56px;
+  min-height: 43px;
 
-  padding: 8px;
+  padding: 5px;
 
   border:
     2px solid #303c57;
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   background: #ffffff;
 
-  font-size: 16px;
+  font-size: 14px;
 
-  line-height: 1.45;
+  line-height: 1.4;
 
   font-weight: 900;
 
@@ -1436,33 +1411,44 @@ rt {
 }
 
 
+/* 下側2冊はプレビュー時に上へ */
+
+.candidate-node[data-pos="2"].preview-open,
+.candidate-node[data-pos="3"].preview-open {
+  transform:
+    translateY(-52px)
+    scale(1.02);
+}
+
+
 /* =========================================================
-   16. 右側案内
+   21. 右側
    ========================================================= */
 
 .side {
+  min-width: 0;
   min-height: 0;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 8px;
 }
 
 .panel {
-  padding: 14px;
+  padding: 10px;
 
   border:
     3px solid #493c2e;
 
-  border-radius: 13px;
+  border-radius: 12px;
 
   background: #fff9e2;
 
   box-shadow:
     0 5px 0
-    rgba(58, 44, 31, 0.28);
+    rgba(58, 44, 31, 0.25);
 }
 
 .panel h2,
@@ -1470,20 +1456,15 @@ rt {
   margin:
     0
     0
-    9px;
+    6px;
 
-  font-size: 18px;
-}
-
-.guide-panel {
-  flex:
-    0 0 auto;
+  font-size: 17px;
 }
 
 .guide-message {
   padding:
-    14px
-    15px;
+    9px
+    10px;
 
   border:
     2px solid #a78648;
@@ -1492,9 +1473,9 @@ rt {
 
   background: #fff3b9;
 
-  font-size: 18px;
+  font-size: 16px;
 
-  line-height: 1.9;
+  line-height: 1.6;
 
   font-weight: 700;
 }
@@ -1504,30 +1485,30 @@ rt {
 
   align-items: center;
 
-  gap: 7px;
+  gap: 6px;
 
-  margin-top: 9px;
+  margin-top: 6px;
 
-  padding: 10px;
+  padding: 6px;
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   background: #e8f2ff;
 
   color: #254f85;
 
-  font-size: 14px;
+  font-size: 12px;
 
   font-weight: 900;
 }
 
 
 /* =========================================================
-   17. 歩いた道
+   22. 歩いた道
    ========================================================= */
 
 .journey-panel {
-  padding: 14px;
+  padding: 10px;
 }
 
 .journey-trail {
@@ -1535,7 +1516,7 @@ rt {
 
   align-items: center;
 
-  gap: 7px;
+  gap: 5px;
 
   flex-wrap: wrap;
 }
@@ -1544,13 +1525,13 @@ rt {
   max-width: 100%;
 
   padding:
-    7px
-    9px;
+    5px
+    7px;
 
   border:
     1px solid #abc7e6;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   background: #edf5ff;
 
@@ -1558,7 +1539,7 @@ rt {
 
   font-size: 12px;
 
-  line-height: 1.55;
+  line-height: 1.45;
 
   font-weight: 900;
 }
@@ -1574,7 +1555,7 @@ rt {
 .journey-arrow {
   color: #d29320;
 
-  font-size: 20px;
+  font-size: 16px;
 
   font-weight: 900;
 }
@@ -1582,24 +1563,24 @@ rt {
 .return-start-button {
   width: 100%;
 
-  min-height: 52px;
+  min-height: 42px;
 
-  margin-top: 12px;
+  margin-top: 8px;
 
   padding:
-    9px
-    12px;
+    6px
+    8px;
 
   border:
     2px solid #5378a8;
 
-  border-radius: 11px;
+  border-radius: 9px;
 
   background: #eef6ff;
 
   color: #244d7e;
 
-  font-size: 16px;
+  font-size: 14px;
 
   font-weight: 900;
 
@@ -1608,26 +1589,26 @@ rt {
 
 
 /* =========================================================
-   18. フクロウの案内
+   23. フクロウ
    ========================================================= */
 
 .footer {
   display: grid;
 
   grid-template-columns:
-    78px
+    62px
     minmax(0, var(--dialogue-width));
 
   justify-content: start;
 
   align-items: center;
 
-  gap: 14px;
+  gap: 9px;
 
   padding:
-    12px
-    20px
-    14px;
+    7px
+    14px
+    8px;
 
   border-top:
     4px solid #071126;
@@ -1641,14 +1622,12 @@ rt {
   text-align: center;
 }
 
-.guide-avatar
-.owl {
-  font-size: 56px;
+.guide-avatar .owl {
+  font-size: 42px;
 }
 
-.guide-avatar
-.name {
-  font-size: 11px;
+.guide-avatar .name {
+  font-size: 8px;
 }
 
 .speech {
@@ -1659,36 +1638,35 @@ rt {
   max-width:
     var(--dialogue-width);
 
-  min-height: 104px;
+  min-height: 72px;
 
   display: flex;
 
   align-items: flex-start;
 
   padding:
-    18px
-    82px
-    18px
-    20px;
+    9px
+    66px
+    9px
+    13px;
 
   border:
     3px solid #29344d;
 
-  border-radius: 15px;
+  border-radius: 13px;
 
   background: #fffef6;
 
   color: #1d2c45;
 
-  font-size: 21px;
+  font-size: 16px;
 
-  line-height: 1.95;
+  line-height: 1.5;
 
   font-weight: 800;
 
   box-shadow:
-    inset 0 0 0 2px
-    #dfe1e8;
+    inset 0 0 0 2px #dfe1e8;
 }
 
 .speech-next {
@@ -1696,21 +1674,20 @@ rt {
 
   position: absolute;
 
-  right: 14px;
-  bottom: 12px;
+  right: 8px;
+  bottom: 8px;
 
-  min-width: 62px;
-
-  min-height: 52px;
+  min-width: 52px;
+  min-height: 40px;
 
   padding:
-    8px
-    11px;
+    4px
+    7px;
 
   border:
     3px solid #315d9f;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background:
     linear-gradient(
@@ -1720,7 +1697,7 @@ rt {
 
   color: #ffffff;
 
-  font-size: 15px;
+  font-size: 13px;
 
   font-weight: 900;
 
@@ -1740,14 +1717,11 @@ rt {
 
 
 /* =========================================================
-   19. 視線誘導
+   24. 視線誘導
    ========================================================= */
 
-body.focus-search
-.world,
-
-body.focus-search
-.side {
+body.focus-search .world,
+body.focus-search .side {
   filter:
     brightness(0.40)
     saturate(0.62);
@@ -1755,38 +1729,31 @@ body.focus-search
   pointer-events: none;
 }
 
-body.focus-search
-.query-wrap,
-
-body.focus-search
-.primary-search {
+body.focus-search .query-wrap,
+body.focus-search .primary-search {
   position: relative;
 
   z-index: 30;
 }
 
-body.focus-center
-.world-bg {
+body.focus-center .world-bg {
   filter:
     brightness(0.52)
     saturate(0.70);
 }
 
-body.focus-center
-.world-shade {
+body.focus-center .world-shade {
   background:
     rgba(6, 15, 31, 0.29);
 }
 
-body.focus-center
-.side {
+body.focus-center .side {
   filter:
     brightness(0.72)
     saturate(0.78);
 }
 
-body.focus-candidates
-.world-bg {
+body.focus-candidates .world-bg {
   filter:
     brightness(0.68)
     saturate(0.82);
@@ -1801,8 +1768,7 @@ body.focus-preview
   opacity: 0.55;
 }
 
-body.focus-preview
-.center-node {
+body.focus-preview .center-node {
   filter:
     brightness(0.50)
     saturate(0.62);
@@ -1810,7 +1776,7 @@ body.focus-preview
 
 
 /* =========================================================
-   20. 検索中演出
+   25. 検索中
    ========================================================= */
 
 .loader {
@@ -1832,7 +1798,7 @@ body.focus-preview
 
   font-size: 18px;
 
-  line-height: 1.8;
+  line-height: 1.7;
 
   font-weight: 900;
 
@@ -1846,36 +1812,27 @@ body.focus-preview
 }
 
 .magic-orb {
-  width: 72px;
-
-  height: 72px;
+  width: 64px;
+  height: 64px;
 
   margin:
     0 auto
-    10px;
+    9px;
 
   border:
     5px solid
     rgba(255, 255, 255, 0.25);
 
-  border-top-color:
-    #ffe16c;
-
-  border-right-color:
-    #6fdcff;
+  border-top-color: #ffe16c;
+  border-right-color: #6fdcff;
 
   border-radius: 50%;
 
   animation:
     spin 1s linear infinite;
-
-  box-shadow:
-    0 0 32px
-    rgba(118, 213, 255, 0.45);
 }
 
 @keyframes spin {
-
   to {
     transform:
       rotate(360deg);
@@ -1914,7 +1871,6 @@ body.focus-preview
 }
 
 @keyframes rise {
-
   0% {
     opacity: 0;
 
@@ -1938,7 +1894,7 @@ body.focus-preview
 
 
 /* =========================================================
-   21. モーダル
+   26. モーダル
    ========================================================= */
 
 .modal {
@@ -1995,9 +1951,9 @@ body.focus-preview
     0
     12px;
 
-  font-size: 28px;
+  font-size: 27px;
 
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .modal-book {
@@ -2012,7 +1968,6 @@ body.focus-preview
 
 .modal-cover {
   width: 100px;
-
   height: 135px;
 
   display: grid;
@@ -2038,7 +1993,7 @@ body.focus-preview
 
   font-size: 20px;
 
-  line-height: 1.9;
+  line-height: 1.85;
 
   font-weight: 700;
 }
@@ -2048,7 +2003,7 @@ body.focus-preview
 
   font-size: 18px;
 
-  line-height: 1.8;
+  line-height: 1.75;
 
   font-weight: 800;
 }
@@ -2058,7 +2013,7 @@ body.focus-preview
 
   grid-template-columns:
     1fr
-    1.35fr
+    1.3fr
     1fr;
 
   gap: 8px;
@@ -2100,45 +2055,22 @@ body.focus-preview
 
 
 /* =========================================================
-   22. 事後質問
+   27. 事後質問
    ========================================================= */
 
 .survey-context {
-  display: grid;
-
-  grid-template-columns:
-    1fr
-    1fr;
-
-  gap: 10px;
-
-  margin-bottom: 14px;
-}
-
-.survey-context-card {
-  padding: 12px;
-
-  border:
-    2px solid #a7b4c8;
-
-  border-radius: 10px;
-
-  background: #f5f8fd;
-
-  font-size: 15px;
-
-  line-height: 1.75;
+  margin-bottom: 12px;
 }
 
 .survey-memory {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 
-  padding: 11px;
+  padding: 10px;
 
   border:
     2px solid #aab9ce;
 
-  border-radius: 12px;
+  border-radius: 11px;
 
   background: #f6f9ff;
 }
@@ -2158,13 +2090,13 @@ body.focus-preview
 
   flex-wrap: wrap;
 
-  gap: 7px;
+  gap: 6px;
 }
 
 .survey-memory-chip {
   padding:
-    6px
-    9px;
+    5px
+    8px;
 
   border:
     1px solid #a7c6eb;
@@ -2179,7 +2111,7 @@ body.focus-preview
 #surveyQuestion {
   font-size: 18px;
 
-  line-height: 1.8;
+  line-height: 1.7;
 
   font-weight: 900;
 }
@@ -2187,15 +2119,15 @@ body.focus-preview
 .survey-options {
   display: grid;
 
-  gap: 9px;
+  gap: 8px;
 }
 
 .survey-option {
-  min-height: 60px;
+  min-height: 54px;
 
   padding:
-    12px
-    14px;
+    10px
+    12px;
 
   border:
     3px solid #35425e;
@@ -2208,7 +2140,7 @@ body.focus-preview
 
   font-size: 16px;
 
-  line-height: 1.6;
+  line-height: 1.5;
 
   font-weight: 900;
 
@@ -2216,32 +2148,32 @@ body.focus-preview
 }
 
 .survey-other {
-  margin-top: 10px;
+  margin-top: 9px;
 }
 
 .survey-other input {
   width: 100%;
 
-  min-height: 54px;
+  min-height: 52px;
 
   padding:
-    10px
-    12px;
+    9px
+    11px;
 
   border:
     3px solid #41506d;
 
   border-radius: 10px;
 
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .survey-other button {
   width: 100%;
 
-  min-height: 54px;
+  min-height: 52px;
 
-  margin-top: 8px;
+  margin-top: 7px;
 
   border:
     3px solid #315a91;
@@ -2253,13 +2185,11 @@ body.focus-preview
   font-size: 16px;
 
   font-weight: 900;
-
-  cursor: pointer;
 }
 
 
 /* =========================================================
-   23. 実験開始
+   28. 実験開始
    ========================================================= */
 
 .experiment-start {
@@ -2288,9 +2218,11 @@ body.focus-preview
 
 .experiment-start-card {
   width:
-    min(540px, 94vw);
+    min(620px, 90vw);
 
-  padding: 24px;
+  padding:
+    28px
+    30px;
 
   border:
     4px solid #2b3853;
@@ -2309,15 +2241,15 @@ body.focus-preview
   margin:
     0
     0
-    10px;
+    12px;
 
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .experiment-note {
-  font-size: 14px;
+  font-size: 15px;
 
-  line-height: 1.8;
+  line-height: 1.75;
 }
 
 .experiment-label {
@@ -2325,13 +2257,15 @@ body.focus-preview
 
   margin-top: 14px;
 
+  font-size: 16px;
+
   font-weight: 900;
 }
 
 .experiment-input {
   width: 100%;
 
-  min-height: 56px;
+  min-height: 58px;
 
   margin-top: 6px;
 
@@ -2344,13 +2278,13 @@ body.focus-preview
 
   border-radius: 10px;
 
-  font-size: 18px;
+  font-size: 19px;
 }
 
 .experiment-start-button {
   width: 100%;
 
-  min-height: 58px;
+  min-height: 60px;
 
   margin-top: 14px;
 
@@ -2367,7 +2301,7 @@ body.focus-preview
 
   color: #4a3515;
 
-  font-size: 18px;
+  font-size: 19px;
 
   font-weight: 900;
 
@@ -2375,34 +2309,33 @@ body.focus-preview
 }
 
 .dataset-status {
-  margin-top: 12px;
+  margin-top: 10px;
 
   color: #54647d;
 
   font-size: 13px;
 
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 
 /* =========================================================
-   24. 最後の賞状
+   29. 賞状
    ========================================================= */
 
 .finish-node {
   z-index: 20;
 
   width:
-    min(96%, 1120px);
+    min(94%, 1160px);
 
   pointer-events: auto;
 }
 
 .finish-card {
   padding:
-    14px
-    18px
-    12px;
+    16px
+    20px;
 
   border:
     4px solid #b37a19;
@@ -2413,29 +2346,24 @@ body.focus-preview
     rgba(255, 248, 210, 0.98);
 
   box-shadow:
-    0 12px 0
-    rgba(117, 76, 17, 0.24),
-
-    0 0 52px
-    rgba(255, 225, 103, 0.35),
-
-    0 24px 46px
-    rgba(0, 0, 0, 0.28);
+    0 12px 0 rgba(117, 76, 17, 0.24),
+    0 0 52px rgba(255, 225, 103, 0.35),
+    0 24px 46px rgba(0, 0, 0, 0.28);
 }
 
 .certificate-header {
   display: grid;
 
   grid-template-columns:
-    38px
+    40px
     minmax(0, 1fr)
-    38px;
+    40px;
 
   align-items: center;
 
   gap: 8px;
 
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 
   text-align: center;
 }
@@ -2445,28 +2373,27 @@ body.focus-preview
 
   place-items: center;
 
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
 
   background: #ffe686;
 
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .certificate-kicker {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .finish-card
 .certificate-header h2 {
   margin: 0;
 
-  font-size:
-    clamp(23px, 2.2vw, 31px);
+  font-size: 29px;
 
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 .certificate-grid {
@@ -2476,14 +2403,14 @@ body.focus-preview
     minmax(0, 0.95fr)
     minmax(0, 1.05fr);
 
-  gap: 12px;
+  gap: 16px;
 }
 
 .certificate-book-panel,
 .certificate-reflection-panel {
   padding:
-    12px
-    14px;
+    14px
+    16px;
 
   border:
     2px solid #d8bd70;
@@ -2499,41 +2426,35 @@ body.focus-preview
   margin:
     0
     0
-    8px;
+    9px;
 
-  font-size: 18px;
-
-  line-height: 1.4;
+  font-size: 20px;
 }
 
 
 /* =========================================================
-   25. 賞状：最終選択本
+   30. 賞状左
    ========================================================= */
 
 .certificate-book-main {
   display: grid;
 
   grid-template-columns:
-    82px
+    94px
     minmax(0, 1fr);
 
-  gap: 11px;
-
-  align-items: start;
+  gap: 13px;
 }
 
-.certificate-book-main
-.cover {
-  width: 82px;
-
-  height: 108px;
+.certificate-book-main .cover {
+  width: 94px;
+  height: 124px;
 }
 
 .certificate-book-title {
-  font-size: 17px;
+  font-size: 20px;
 
-  line-height: 1.5;
+  line-height: 1.45;
 
   font-weight: 900;
 }
@@ -2543,13 +2464,13 @@ body.focus-preview
 
   color: #5e6a7b;
 
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .certificate-subject-title {
   margin-top: 6px;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 900;
 }
@@ -2566,8 +2487,8 @@ body.focus-preview
 
 .certificate-subjects span {
   padding:
-    3px
-    6px;
+    4px
+    7px;
 
   border:
     1px solid #b4c8e4;
@@ -2576,7 +2497,7 @@ body.focus-preview
 
   background: #edf5ff;
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .finish-shelf {
@@ -2586,28 +2507,28 @@ body.focus-preview
     6px;
 
   padding:
-    7px
+    8px
     10px;
 
   border:
     2px solid #3d73b6;
 
-  border-radius: 12px;
+  border-radius: 11px;
 
   background: #edf6ff;
 
   color: #214c82;
 
-  font-size: 15px;
+  font-size: 17px;
 
-  line-height: 1.45;
+  line-height: 1.4;
 
   font-weight: 900;
 }
 
 .finish-go-shelf {
   padding:
-    7px
+    8px
     10px;
 
   border-radius: 10px;
@@ -2616,16 +2537,16 @@ body.focus-preview
 
   color: #594418;
 
-  font-size: 13px;
+  font-size: 15px;
 
-  line-height: 1.5;
+  line-height: 1.45;
 
   font-weight: 800;
 }
 
 
 /* =========================================================
-   26. 賞状：興味ゲージ
+   31. 賞状興味ゲージ
    ========================================================= */
 
 .reflection-subtitle {
@@ -2633,7 +2554,7 @@ body.focus-preview
 
   color: #31425f;
 
-  font-size: 16px;
+  font-size: 18px;
 
   font-weight: 900;
 }
@@ -2641,13 +2562,13 @@ body.focus-preview
 .interest-gauge-list {
   display: grid;
 
-  gap: 12px;
+  gap: 11px;
 }
 
 .interest-gauge-row {
   display: grid;
 
-  gap: 5px;
+  gap: 4px;
 }
 
 .interest-gauge-label {
@@ -2661,7 +2582,7 @@ body.focus-preview
 
   color: #1f2e46;
 
-  font-size: 16px;
+  font-size: 17px;
 
   font-weight: 900;
 }
@@ -2669,11 +2590,11 @@ body.focus-preview
 .interest-gauge-label strong {
   color: #54647b;
 
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .interest-gauge-track {
-  height: 15px;
+  height: 18px;
 
   overflow: hidden;
 
@@ -2700,34 +2621,34 @@ body.focus-preview
 }
 
 .reflection-message {
-  margin-top: 10px;
+  margin-top: 11px;
 
   padding:
-    8px
+    9px
     10px;
 
   border-radius: 10px;
 
   background: #fff5c9;
 
-  font-size: 14px;
+  font-size: 15px;
 
-  line-height: 1.55;
+  line-height: 1.5;
 
   font-weight: 800;
 }
 
 
 /* =========================================================
-   27. 賞状：探索経路
+   32. 賞状経路
    ========================================================= */
 
 .certificate-trail {
-  margin-top: 8px;
+  margin-top: 9px;
 
   padding:
-    7px
-    9px;
+    8px
+    10px;
 
   border-radius: 10px;
 
@@ -2738,7 +2659,7 @@ body.focus-preview
 .certificate-trail-title {
   margin-bottom: 4px;
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 900;
 }
@@ -2755,19 +2676,19 @@ body.focus-preview
 
 .certificate-trail-book,
 .certificate-more {
-  max-width: 155px;
+  max-width: 185px;
 
   overflow: hidden;
 
   padding:
     4px
-    6px;
+    7px;
 
   border-radius: 8px;
 
   background: #ffffff;
 
-  font-size: 10px;
+  font-size: 12px;
 
   text-overflow: ellipsis;
 
@@ -2777,7 +2698,7 @@ body.focus-preview
 .certificate-arrow {
   color: #d19422;
 
-  font-size: 14px;
+  font-size: 16px;
 
   font-weight: 900;
 }
@@ -2797,7 +2718,7 @@ body.focus-preview
 }
 
 .finish-camera {
-  min-height: 34px;
+  min-height: 32px;
 
   padding:
     5px
@@ -2809,20 +2730,197 @@ body.focus-preview
 
   color: #5a4318;
 
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 900;
 }
 
 .certificate-finish-message {
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 900;
 }
 
 
 /* =========================================================
-   28. 終了画面を1画面に収める
+   33. PC
+   100%表示のまま1画面へ
+   ========================================================= */
+
+@media (min-width: 1000px) {
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    overflow: hidden;
+  }
+
+  .app {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      92px;
+
+    overflow: hidden;
+  }
+
+  .main {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .world {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .footer {
+    height: 92px;
+    min-height: 92px;
+  }
+
+  .speech {
+    min-height: 68px;
+  }
+}
+
+
+/* =========================================================
+   34. 高さが低めのPC
+   ========================================================= */
+
+@media
+(min-width: 1000px)
+and
+(max-height: 820px) {
+
+  .header {
+    padding:
+      7px
+      18px
+      8px;
+  }
+
+  .header-top {
+    margin-bottom: 5px;
+  }
+
+  .brand {
+    font-size: 25px;
+  }
+
+  .step-item {
+    min-height: 32px;
+
+    padding:
+      4px
+      8px;
+
+    font-size: 12px;
+  }
+
+  .questbar {
+    grid-template-columns:
+      220px
+      minmax(0, 1fr)
+      150px;
+  }
+
+  .quest-label {
+    font-size: 15px;
+  }
+
+  #queryInput,
+  .primary-search {
+    height: 46px;
+    min-height: 46px;
+  }
+
+  #queryInput {
+    font-size: 18px;
+  }
+
+  .primary-search {
+    font-size: 16px;
+  }
+
+  .app {
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      82px;
+  }
+
+  .main {
+    padding:
+      6px
+      8px;
+  }
+
+  .side {
+    width: 270px;
+  }
+
+  .main {
+    grid-template-columns:
+      minmax(0, 1fr)
+      270px;
+  }
+
+  .graph {
+    inset:
+      10px
+      14px;
+
+    grid-template-columns:
+      minmax(190px, 1fr)
+      minmax(345px, 405px)
+      minmax(190px, 1fr);
+
+    grid-template-rows:
+      minmax(120px, 1fr)
+      minmax(210px, auto)
+      minmax(120px, 1fr);
+  }
+
+  .center-node {
+    width:
+      min(100%, 405px);
+  }
+
+  .candidate-node {
+    width:
+      min(100%, 235px);
+  }
+
+  .footer {
+    height: 82px;
+    min-height: 82px;
+  }
+
+  .guide-avatar .owl {
+    font-size: 36px;
+  }
+
+  .speech {
+    min-height: 60px;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+  }
+}
+
+
+/* =========================================================
+   35. 終了画面
    ========================================================= */
 
 body.study-complete {
@@ -2831,34 +2929,28 @@ body.study-complete {
   overflow: hidden;
 }
 
-body.study-complete
-.app {
+body.study-complete .app {
   height: 100dvh;
 
   min-height: 0;
 
-  display: grid;
-
   grid-template-rows:
     minmax(0, 1fr)
-    auto;
+    80px;
 }
 
-body.study-complete
-.header {
+body.study-complete .header {
   display: none;
 }
 
-body.study-complete
-.side {
+body.study-complete .side {
   display: none;
 }
 
-body.study-complete
-.main {
-  min-height: 0;
-
+body.study-complete .main {
   height: 100%;
+
+  min-height: 0;
 
   display: block;
 
@@ -2867,19 +2959,14 @@ body.study-complete
     12px;
 }
 
-body.study-complete
-.world {
+body.study-complete .world {
   width: 100%;
-
   height: 100%;
 
   min-height: 0;
-
-  overflow: hidden;
 }
 
-body.study-complete
-.graph {
+body.study-complete .graph {
   position: absolute;
 
   inset:
@@ -2889,490 +2976,61 @@ body.study-complete
   display: flex;
 
   align-items: center;
-
   justify-content: center;
-
-  width: auto;
-
-  height: auto;
 }
 
-body.study-complete
-.finish-node {
+body.study-complete .finish-node {
   width:
-    min(96%, 1120px);
+    min(94vw, 1180px);
 
   max-height: 100%;
 }
 
-body.study-complete
-.footer {
-  position: static;
+body.study-complete .finish-card {
+  max-height: 100%;
 
-  display: grid;
+  overflow: hidden;
+}
+
+body.study-complete .footer {
+  height: 80px;
+  min-height: 80px;
 
   grid-template-columns:
-    58px
+    56px
     minmax(0, 1fr);
 
-  align-items: center;
+  padding:
+    5px
+    12px;
+}
 
-  gap: 8px;
+body.study-complete .guide-avatar .owl {
+  font-size: 38px;
+}
 
-  min-height: 92px;
+body.study-complete .speech {
+  width: 100%;
+  max-width: none;
+
+  min-height: 60px;
 
   padding:
     7px
-    14px;
-}
-
-body.study-complete
-.guide-avatar
-.owl {
-  font-size: 39px;
-}
-
-body.study-complete
-.guide-avatar
-.name {
-  font-size: 8px;
-}
-
-body.study-complete
-.speech {
-  width: 100%;
-
-  max-width: none;
-
-  min-height: 70px;
-
-  padding:
-    9px
-    13px;
+    12px;
 
   font-size: 15px;
 
-  line-height: 1.55;
+  line-height: 1.4;
 }
 
 
 /* =========================================================
-   29. PC大画面
+   36. Tablet
    ========================================================= */
 
-@media (min-width: 1200px) {
-
-  :root {
-    --dialogue-width: 74vw;
-  }
-
-  .header {
-    padding:
-      18px
-      28px;
-  }
-
-  .brand {
-    font-size:
-      clamp(31px, 2vw, 38px);
-  }
-
-  .stepper {
-    gap: 9px;
-  }
-
-  .step-item {
-    min-height: 48px;
-
-    padding:
-      9px
-      14px;
-
-    font-size: 15px;
-  }
-
-  .step-item .num {
-    width: 30px;
-
-    height: 30px;
-
-    font-size: 14px;
-  }
-
-  .questbar {
-    grid-template-columns:
-      auto
-      minmax(760px, 1fr)
-      auto;
-
-    gap: 18px;
-
-    max-width: none;
-  }
-
-  .quest-label {
-    font-size: 19px;
-  }
-
-  #queryInput {
-    min-height: 74px;
-
-    padding:
-      15px
-      20px
-      15px
-      58px;
-
-    font-size: 24px;
-  }
-
-  .query-wrap::before {
-    left: 20px;
-
-    font-size: 28px;
-  }
-
-  .primary-search {
-    min-height: 74px;
-
-    padding:
-      12px
-      30px;
-
-    font-size: 22px;
-  }
-
-  .main {
-    grid-template-columns:
-      minmax(0, 1fr)
-      380px;
-
-    gap: 16px;
-
-    padding: 12px;
-  }
-
-  .world {
-    min-height: 780px;
-  }
-
-  .graph {
-    inset:
-      26px
-      38px;
-
-    grid-template-columns:
-      minmax(320px, 1fr)
-      minmax(520px, 620px)
-      minmax(320px, 1fr);
-
-    grid-template-rows:
-      minmax(230px, 1fr)
-      minmax(340px, auto)
-      minmax(230px, 1fr);
-
-    gap:
-      26px
-      38px;
-  }
-
-  .center-node {
-    width:
-      min(100%, 610px);
-  }
-
-  .book-body {
-    grid-template-columns:
-      122px
-      minmax(0, 1fr);
-
-    gap: 18px;
-
-    padding:
-      19px
-      21px;
-  }
-
-  .cover {
-    width: 122px;
-
-    height: 160px;
-  }
-
-  .book-title {
-    font-size:
-      clamp(29px, 1.7vw, 34px);
-
-    line-height: 1.5;
-  }
-
-  .book-meta {
-    font-size: 17px;
-  }
-
-  .book-tag {
-    font-size: 15px;
-
-    padding:
-      6px
-      11px;
-  }
-
-  .fit-stage {
-    padding:
-      0
-      21px;
-  }
-
-  .fit-label {
-    font-size: 17px;
-  }
-
-  .fit-number {
-    font-size: 47px;
-  }
-
-  .fit-unit {
-    font-size: 20px;
-  }
-
-  .fit-note {
-    font-size: 16px;
-  }
-
-  .fit-track {
-    height: 15px;
-  }
-
-  .subject-stage {
-    padding:
-      0
-      21px;
-  }
-
-  .subject-kicker {
-    font-size: 18px;
-  }
-
-  .subject-chip {
-    min-height: 42px;
-
-    padding:
-      8px
-      13px;
-
-    font-size: 17px;
-  }
-
-  .shelf-info {
-    padding:
-      11px
-      13px;
-
-    font-size: 18px;
-  }
-
-  .shelf-icon {
-    font-size: 24px;
-  }
-
-  .center-actions {
-    gap: 11px;
-
-    padding:
-      0
-      21px
-      20px;
-  }
-
-  .btn {
-    min-height: 66px;
-
-    font-size: 20px;
-  }
-
-  .btn.main-next {
-    min-height: 72px;
-
-    font-size: 21px;
-  }
-
-  .candidate-node {
-    width:
-      min(100%, 370px);
-  }
-
-  .candidate-node
-  .book-body {
-    grid-template-columns:
-      96px
-      minmax(0, 1fr);
-
-    gap: 15px;
-
-    padding: 16px;
-  }
-
-  .candidate-node
-  .cover {
-    width: 96px;
-
-    height: 126px;
-  }
-
-  .candidate-node
-  .book-title {
-    font-size: 23px;
-
-    line-height: 1.5;
-  }
-
-  .candidate-shelf,
-  .relation-tag {
-    font-size: 16px;
-
-    padding:
-      6px
-      10px;
-  }
-
-  .candidate-node
-  .preview p {
-    font-size: 20px;
-
-    line-height: 1.8;
-  }
-
-  .mini-btn {
-    min-height: 60px;
-
-    font-size: 18px;
-  }
-
-  .side {
-    gap: 14px;
-  }
-
-  .panel {
-    padding: 17px;
-  }
-
-  .panel h2,
-  .panel h3 {
-    font-size: 22px;
-  }
-
-  .guide-message {
-    font-size: 20px;
-
-    line-height: 1.85;
-  }
-
-  .next-hint {
-    font-size: 16px;
-  }
-
-  .journey-step {
-    font-size: 15px;
-
-    padding:
-      9px
-      11px;
-  }
-
-  .return-start-button {
-    min-height: 58px;
-
-    font-size: 18px;
-  }
-
-  .footer {
-    grid-template-columns:
-      94px
-      minmax(0, var(--dialogue-width));
-
-    padding:
-      13px
-      22px
-      15px;
-  }
-
-  .guide-avatar
-  .owl {
-    font-size: 64px;
-  }
-
-  .guide-avatar
-  .name {
-    font-size: 12px;
-  }
-
-  .speech {
-    min-height: 100px;
-
-    font-size: 22px;
-
-    line-height: 1.8;
-
-    padding:
-      16px
-      88px
-      16px
-      20px;
-  }
-
-  .speech-next {
-    min-width: 68px;
-
-    min-height: 56px;
-
-    font-size: 17px;
-  }
-}
-
-
-/* =========================================================
-   30. タブレット
-   ========================================================= */
-
-@media (max-width: 1199px) {
-
-  .main {
-    grid-template-columns:
-      minmax(0, 1fr)
-      280px;
-  }
-
-  .questbar {
-    grid-template-columns:
-      auto
-      minmax(320px, 1fr)
-      auto;
-  }
-
-  .graph {
-    grid-template-columns:
-      minmax(200px, 1fr)
-      minmax(350px, 450px)
-      minmax(200px, 1fr);
-  }
-
-  .candidate-node {
-    width:
-      min(100%, 270px);
-  }
-
-  :root {
-    --dialogue-width: 76vw;
-  }
-}
-
-
-/* =========================================================
-   31. 小型タブレット
-   ========================================================= */
-
-@media (max-width: 860px) {
+@media
+(max-width: 999px) {
 
   body {
     overflow-y: auto;
@@ -3387,7 +3045,7 @@ body.study-complete
   }
 
   .brand {
-    margin-bottom: 10px;
+    margin-bottom: 9px;
   }
 
   .questbar {
@@ -3406,9 +3064,9 @@ body.study-complete
   }
 
   .world {
-    height: 760px;
+    min-height: 720px;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .side {
@@ -3416,7 +3074,7 @@ body.study-complete
   }
 
   .journey-panel {
-    margin-top: 10px;
+    margin-top: 9px;
   }
 
   .footer {
@@ -3425,31 +3083,33 @@ body.study-complete
     bottom: 0;
 
     z-index: 50;
-  }
 
-  :root {
-    --dialogue-width:
-      calc(100vw - 92px);
+    grid-template-columns:
+      54px
+      minmax(0, 1fr);
   }
 
   .speech {
-    font-size: 19px;
+    width: 100%;
+
+    max-width: none;
   }
 }
 
 
 /* =========================================================
-   32. スマートフォン
+   37. Smartphone
    ========================================================= */
 
-@media (max-width: 620px) {
+@media
+(max-width: 620px) {
 
   .header {
-    padding: 10px;
+    padding: 9px;
   }
 
   .brand {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .stepper
@@ -3458,43 +3118,40 @@ body.study-complete
   }
 
   .questbar {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
 
-    gap: 8px;
-  }
-
-  .quest-label {
-    font-size: 16px;
+    gap: 7px;
   }
 
   #queryInput {
-    min-height: 64px;
+    min-height: 60px;
 
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .primary-search {
     width: 100%;
 
-    min-height: 62px;
+    min-height: 58px;
 
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .main {
-    padding: 6px;
+    padding: 5px;
   }
 
   .world {
-    height: 900px;
+    min-height: 880px;
 
-    border-radius: 14px;
+    border-radius: 13px;
   }
 
   .graph {
     inset:
-      14px
-      8px;
+      12px
+      7px;
 
     grid-template-columns:
       1fr
@@ -3513,50 +3170,56 @@ body.study-complete
     align-content: center;
 
     gap:
-      16px
-      10px;
+      14px
+      8px;
   }
 
   .center-node {
     width:
-      min(96%, 420px);
+      min(96%, 410px);
+  }
+
+  .book-body {
+    grid-template-columns:
+      80px
+      minmax(0, 1fr);
+  }
+
+  .cover {
+    width: 80px;
+    height: 106px;
+  }
+
+  .book-title {
+    font-size: 20px;
   }
 
   .candidate-node {
     width:
-      min(100%, 200px);
+      min(100%, 195px);
   }
 
-  .candidate-node
-  .book-body {
+  .candidate-node .book-body {
     display: block;
 
-    padding: 10px;
+    padding: 9px;
   }
 
-  .candidate-node
-  .cover {
+  .candidate-node .cover {
     float: left;
 
-    width: 58px;
-
-    height: 78px;
+    width: 56px;
+    height: 74px;
 
     margin:
       0
-      9px
-      6px
+      8px
+      5px
       0;
   }
 
-  .candidate-node
-  .book-title {
-    font-size: 17px;
-  }
-
-  .candidate-shelf,
-  .relation-tag {
-    font-size: 13px;
+  .candidate-node .book-title {
+    font-size: 16px;
   }
 
   .candidate-node.preview-open {
@@ -3564,24 +3227,15 @@ body.study-complete
       1 / -1;
 
     width:
-      min(94%, 420px);
+      min(94%, 410px);
 
     justify-self: center;
   }
 
   .candidate-node.preview-open
-  .book-title {
-    font-size: 20px;
-  }
-
-  .candidate-node.preview-open
-  .preview p {
-    font-size: 18px;
-  }
-
-  .candidate-node.preview-open
   .preview-actions {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .candidate-node.preview-open
@@ -3594,26 +3248,9 @@ body.study-complete
     display: none;
   }
 
-  .book-body {
-    grid-template-columns:
-      84px
-      minmax(0, 1fr);
-
-    padding: 12px;
-  }
-
-  .cover {
-    width: 84px;
-
-    height: 112px;
-  }
-
-  .book-title {
-    font-size: 21px;
-  }
-
   .center-actions {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .center-actions
@@ -3623,88 +3260,38 @@ body.study-complete
 
   .footer {
     grid-template-columns:
-      52px
+      50px
       minmax(0, 1fr);
 
-    gap: 7px;
-
-    padding: 7px;
+    padding: 6px;
   }
 
-  .guide-avatar
-  .owl {
-    font-size: 39px;
-  }
-
-  .guide-avatar
-  .name {
-    font-size: 8px;
+  .guide-avatar .owl {
+    font-size: 37px;
   }
 
   .speech {
-    width: 100%;
-
-    max-width: none;
-
-    min-height: 104px;
+    min-height: 100px;
 
     padding:
-      13px
-      64px
-      13px
-      13px;
+      12px
+      60px
+      12px
+      12px;
 
-    font-size: 18px;
+    font-size: 17px;
 
-    line-height: 1.9;
-  }
-
-  .speech-next {
-    right: 8px;
-
-    bottom: 9px;
-
-    min-width: 52px;
-
-    min-height: 48px;
-
-    padding:
-      6px
-      8px;
-
-    font-size: 13px;
-  }
-
-  .survey-context {
-    grid-template-columns: 1fr;
+    line-height: 1.75;
   }
 
   .modal-actions {
-    grid-template-columns: 1fr;
-  }
-
-  #detailTitle {
-    font-size: 24px;
-  }
-
-  #detailSummary {
-    font-size: 18px;
-  }
-
-  #detailMeta {
-    font-size: 16px;
+    grid-template-columns:
+      1fr;
   }
 
   .certificate-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .interest-gauge-label {
-    font-size: 15px;
-  }
-
-  .interest-gauge-track {
-    height: 14px;
+    grid-template-columns:
+      1fr;
   }
 
   body.study-complete {
@@ -3715,53 +3302,48 @@ body.study-complete
     overflow-y: auto;
   }
 
-  body.study-complete
-  .app {
+  body.study-complete .app {
     height: auto;
 
     min-height: 100dvh;
   }
 
-  body.study-complete
-  .main {
+  body.study-complete .main {
     height: auto;
   }
 
-  body.study-complete
-  .world {
+  body.study-complete .world {
     height: auto;
 
     min-height: 820px;
   }
 
-  body.study-complete
-  .graph {
+  body.study-complete .graph {
     position: relative;
 
     inset: auto;
 
-    padding: 8px;
+    padding: 7px;
   }
 
-  body.study-complete
-  .finish-card {
+  body.study-complete .finish-card {
     overflow: visible;
   }
 
-  body.study-complete
-  .footer {
+  body.study-complete .footer {
     position: static;
+
+    height: auto;
   }
 }
 
 
 /* =========================================================
-   33. アニメーションを減らす設定
+   38. アニメーションを減らす設定
    ========================================================= */
 
-@media (
-  prefers-reduced-motion: reduce
-) {
+@media
+(prefers-reduced-motion: reduce) {
 
   *,
   *::before,
@@ -3774,837 +3356,5 @@ body.study-complete
 
     transition-duration:
       0.01ms !important;
-  }
-}
-
-/* =========================================================
-   PC最終調整
-   目的：
-   ・通常探索画面を1画面に収める
-   ・検索欄や本カードは読みやすい大きさを維持
-   ・フクロウ案内を画面内に固定
-   ・終了賞状は文字を大きくする
-   ========================================================= */
-
-@media (min-width: 1000px) {
-
-  /* =======================================================
-     1. PCでは画面高を基準に全体を組む
-     ======================================================= */
-
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-  }
-
-  body {
-    overflow: hidden;
-  }
-
-  .app {
-    width: 100%;
-    height: 100dvh;
-    min-height: 0;
-
-    display: grid;
-
-    /*
-      上：ヘッダー
-      中：冒険画面
-      下：フクロウ
-    */
-    grid-template-rows:
-      auto
-      minmax(0, 1fr)
-      auto;
-
-    overflow: hidden;
-  }
-
-
-  /* =======================================================
-     2. ヘッダー
-     ======================================================= */
-
-  .header {
-    padding:
-      12px
-      24px
-      14px;
-  }
-
-  .header-top {
-    margin-bottom: 9px;
-  }
-
-  .brand {
-    font-size: 30px;
-  }
-
-  .step-item {
-    min-height: 42px;
-
-    padding:
-      7px
-      12px;
-
-    font-size: 14px;
-  }
-
-  .step-item .num {
-    width: 27px;
-    height: 27px;
-
-    font-size: 13px;
-  }
-
-
-  /* =======================================================
-     3. 検索欄
-     大きさは残すが、縦を少し節約
-     ======================================================= */
-
-  .questbar {
-    grid-template-columns:
-      auto
-      minmax(600px, 1fr)
-      180px;
-
-    gap: 14px;
-
-    width: 100%;
-    max-width: none;
-  }
-
-  .quest-label {
-    font-size: 18px;
-  }
-
-  #queryInput {
-    height: 60px;
-    min-height: 60px;
-
-    padding:
-      11px
-      18px
-      11px
-      52px;
-
-    font-size: 22px;
-  }
-
-  .query-wrap::before {
-    left: 18px;
-
-    font-size: 25px;
-  }
-
-  .primary-search {
-    height: 60px;
-    min-height: 60px;
-
-    padding:
-      9px
-      20px;
-
-    font-size: 19px;
-  }
-
-
-  /* =======================================================
-     4. メイン画面
-     ======================================================= */
-
-  .main {
-    min-height: 0;
-    height: 100%;
-
-    display: grid;
-
-    grid-template-columns:
-      minmax(0, 1fr)
-      320px;
-
-    gap: 12px;
-
-    padding: 10px 12px;
-  }
-
-
-  /* =======================================================
-     5. 世界
-     min-heightを使わないことが重要
-     ======================================================= */
-
-  .world {
-    width: 100%;
-    height: 100%;
-
-    min-height: 0;
-
-    border-radius: 18px;
-  }
-
-  .world-bg {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-    object-position: center;
-  }
-
-
-  /* =======================================================
-     6. 本の配置エリア
-     上下端に余白を確保
-     ======================================================= */
-
-  .graph {
-    inset:
-      18px
-      24px;
-
-    grid-template-columns:
-      minmax(260px, 1fr)
-      minmax(410px, 500px)
-      minmax(260px, 1fr);
-
-    grid-template-rows:
-      minmax(160px, 1fr)
-      minmax(270px, auto)
-      minmax(160px, 1fr);
-
-    gap:
-      14px
-      25px;
-  }
-
-
-  /* =======================================================
-     7. 中央本
-     現在より少しだけ小さくして縦切れを防ぐ
-     ======================================================= */
-
-  .center-node {
-    width:
-      min(100%, 500px);
-  }
-
-  .center-node .book-body {
-    grid-template-columns:
-      98px
-      minmax(0, 1fr);
-
-    gap: 15px;
-
-    padding:
-      14px
-      16px;
-  }
-
-  .center-node .cover {
-    width: 98px;
-    height: 128px;
-  }
-
-  .center-node .book-title {
-    font-size: 25px;
-    line-height: 1.45;
-  }
-
-  .center-node .book-tag {
-    font-size: 14px;
-  }
-
-
-  /* =======================================================
-     8. ぴったり度
-     ======================================================= */
-
-  .fit-stage {
-    padding:
-      0
-      16px;
-  }
-
-  .fit-card {
-    gap: 10px;
-
-    padding:
-      8px
-      10px;
-  }
-
-  .fit-label {
-    font-size: 14px;
-  }
-
-  .fit-number {
-    font-size: 38px;
-  }
-
-  .fit-unit {
-    font-size: 16px;
-  }
-
-  .fit-track {
-    height: 12px;
-  }
-
-  .fit-note {
-    font-size: 13px;
-  }
-
-
-  /* =======================================================
-     9. 手がかり
-     ======================================================= */
-
-  .subject-stage {
-    padding:
-      0
-      16px;
-  }
-
-  .subject-kicker {
-    font-size: 15px;
-  }
-
-  .subject-chip {
-    min-height: 34px;
-
-    padding:
-      5px
-      10px;
-
-    font-size: 14px;
-  }
-
-  .shelf-info {
-    margin-top: 7px;
-
-    padding:
-      7px
-      10px;
-
-    font-size: 15px;
-  }
-
-
-  /* =======================================================
-     10. 中央ボタン
-     ======================================================= */
-
-  .center-actions {
-    gap: 8px;
-
-    padding:
-      0
-      16px
-      14px;
-  }
-
-  .btn {
-    min-height: 52px;
-
-    padding:
-      7px
-      9px;
-
-    font-size: 17px;
-  }
-
-  .btn.main-next {
-    min-height: 56px;
-
-    font-size: 18px;
-  }
-
-
-  /* =======================================================
-     11. 関連本
-     大きさは確保しつつ画面内へ
-     ======================================================= */
-
-  .candidate-node {
-    width:
-      min(100%, 300px);
-  }
-
-  .candidate-node .book-body {
-    grid-template-columns:
-      78px
-      minmax(0, 1fr);
-
-    gap: 11px;
-
-    padding: 11px;
-  }
-
-  .candidate-node .cover {
-    width: 78px;
-    height: 102px;
-  }
-
-  .candidate-node .book-title {
-    font-size: 19px;
-    line-height: 1.45;
-  }
-
-  .candidate-shelf,
-  .relation-tag {
-    padding:
-      4px
-      7px;
-
-    font-size: 13px;
-  }
-
-  .candidate-node .preview p {
-    font-size: 17px;
-    line-height: 1.6;
-  }
-
-  .mini-btn {
-    min-height: 48px;
-
-    padding: 6px;
-
-    font-size: 15px;
-  }
-
-
-  /* =======================================================
-     12. 右側の案内
-     ======================================================= */
-
-  .side {
-    min-height: 0;
-
-    gap: 10px;
-  }
-
-  .panel {
-    padding: 12px;
-  }
-
-  .panel h2,
-  .panel h3 {
-    margin-bottom: 7px;
-
-    font-size: 18px;
-  }
-
-  .guide-message {
-    padding:
-      10px
-      12px;
-
-    font-size: 17px;
-    line-height: 1.65;
-  }
-
-  .next-hint {
-    padding: 7px;
-
-    font-size: 13px;
-  }
-
-  .journey-panel {
-    padding: 11px;
-  }
-
-  .journey-step {
-    padding:
-      6px
-      8px;
-
-    font-size: 13px;
-  }
-
-  .return-start-button {
-    min-height: 48px;
-
-    font-size: 15px;
-  }
-
-
-  /* =======================================================
-     13. フクロウ
-     必ず画面下に収める
-     ======================================================= */
-
-  .footer {
-    min-height: 88px;
-
-    display: grid;
-
-    grid-template-columns:
-      70px
-      minmax(0, 1fr);
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding:
-      7px
-      16px
-      9px;
-  }
-
-  .guide-avatar .owl {
-    font-size: 46px;
-  }
-
-  .guide-avatar .name {
-    font-size: 9px;
-  }
-
-  .speech {
-    width: 100%;
-    max-width: none;
-
-    min-height: 70px;
-
-    padding:
-      10px
-      72px
-      10px
-      15px;
-
-    font-size: 17px;
-    line-height: 1.55;
-  }
-
-  .speech-next {
-    right: 10px;
-    bottom: 9px;
-
-    min-width: 58px;
-    min-height: 44px;
-
-    padding:
-      5px
-      8px;
-
-    font-size: 14px;
-  }
-
-
-  /* =======================================================
-     14. プレビューを開いたとき
-     下側カードは上方向にも余裕を持たせる
-     ======================================================= */
-
-  .candidate-node[data-pos="2"].preview-open,
-  .candidate-node[data-pos="3"].preview-open {
-    transform:
-      translateY(-65px)
-      scale(1.02);
-  }
-}
-
-
-/* =========================================================
-   PC：最後の賞状
-   通常画面とは別に文字を大きくする
-   ========================================================= */
-
-@media (min-width: 1000px) {
-
-  body.study-complete {
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  body.study-complete .app {
-    height: 100dvh;
-
-    grid-template-rows:
-      minmax(0, 1fr)
-      82px;
-  }
-
-  body.study-complete .main {
-    height: 100%;
-    min-height: 0;
-
-    padding:
-      10px
-      14px;
-  }
-
-  body.study-complete .world {
-    height: 100%;
-    min-height: 0;
-  }
-
-  body.study-complete .graph {
-    inset:
-      10px
-      14px;
-  }
-
-
-  /* 賞状本体をかなり大きく */
-  body.study-complete .finish-node {
-    width:
-      min(94vw, 1250px);
-
-    max-height: 100%;
-  }
-
-  body.study-complete .finish-card {
-    max-height: 100%;
-
-    padding:
-      18px
-      22px
-      16px;
-
-    overflow: hidden;
-  }
-
-
-  /* タイトル */
-  body.study-complete .certificate-header {
-    margin-bottom: 14px;
-  }
-
-  body.study-complete .certificate-kicker {
-    font-size: 16px;
-  }
-
-  body.study-complete
-  .certificate-header h2 {
-    font-size: 32px;
-  }
-
-  body.study-complete
-  .certificate-star {
-    width: 42px;
-    height: 42px;
-
-    font-size: 24px;
-  }
-
-
-  /* 左右2カラム */
-  body.study-complete
-  .certificate-grid {
-    grid-template-columns:
-      minmax(0, 0.95fr)
-      minmax(0, 1.05fr);
-
-    gap: 18px;
-  }
-
-
-  /* パネル */
-  body.study-complete
-  .certificate-book-panel,
-
-  body.study-complete
-  .certificate-reflection-panel {
-    padding:
-      16px
-      18px;
-  }
-
-  body.study-complete
-  .certificate-book-panel h3,
-
-  body.study-complete
-  .certificate-reflection-panel h3 {
-    font-size: 21px;
-  }
-
-
-  /* 最終本 */
-  body.study-complete
-  .certificate-book-main {
-    grid-template-columns:
-      105px
-      minmax(0, 1fr);
-
-    gap: 15px;
-  }
-
-  body.study-complete
-  .certificate-book-main .cover {
-    width: 105px;
-    height: 138px;
-  }
-
-  body.study-complete
-  .certificate-book-title {
-    font-size: 22px;
-    line-height: 1.5;
-  }
-
-  body.study-complete
-  .certificate-isbn {
-    font-size: 13px;
-  }
-
-  body.study-complete
-  .certificate-subject-title {
-    font-size: 15px;
-  }
-
-  body.study-complete
-  .certificate-subjects span {
-    padding:
-      5px
-      8px;
-
-    font-size: 14px;
-  }
-
-
-  /* 本棚案内 */
-  body.study-complete
-  .finish-shelf {
-    padding:
-      9px
-      12px;
-
-    font-size: 18px;
-  }
-
-  body.study-complete
-  .finish-go-shelf {
-    padding:
-      9px
-      12px;
-
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-
-  /* =======================================================
-     興味ゲージ
-     ======================================================= */
-
-  body.study-complete
-  .reflection-subtitle {
-    margin-bottom: 13px;
-
-    font-size: 19px;
-  }
-
-  body.study-complete
-  .interest-gauge-list {
-    gap: 13px;
-  }
-
-  body.study-complete
-  .interest-gauge-label {
-    font-size: 18px;
-  }
-
-  body.study-complete
-  .interest-gauge-label strong {
-    font-size: 16px;
-  }
-
-  body.study-complete
-  .interest-gauge-track {
-    height: 19px;
-  }
-
-  body.study-complete
-  .reflection-message {
-    margin-top: 13px;
-
-    padding:
-      10px
-      12px;
-
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-
-  /* 探索経路 */
-  body.study-complete
-  .certificate-trail {
-    margin-top: 12px;
-
-    padding:
-      9px
-      11px;
-  }
-
-  body.study-complete
-  .certificate-trail-title {
-    font-size: 15px;
-  }
-
-  body.study-complete
-  .certificate-trail-book,
-
-  body.study-complete
-  .certificate-more {
-    max-width: 210px;
-
-    padding:
-      5px
-      8px;
-
-    font-size: 13px;
-  }
-
-  body.study-complete
-  .certificate-arrow {
-    font-size: 17px;
-  }
-
-
-  /* 最下部 */
-  body.study-complete
-  .finish-camera,
-
-  body.study-complete
-  .certificate-finish-message {
-    font-size: 14px;
-  }
-
-
-  /* =======================================================
-     賞状時のフクロウは小さくしすぎない
-     ======================================================= */
-
-  body.study-complete
-  .footer {
-    min-height: 82px;
-
-    grid-template-columns:
-      58px
-      minmax(0, 1fr);
-
-    padding:
-      6px
-      14px;
-  }
-
-  body.study-complete
-  .guide-avatar .owl {
-    font-size: 40px;
-  }
-
-  body.study-complete
-  .speech {
-    min-height: 64px;
-
-    padding:
-      8px
-      12px;
-
-    font-size: 16px;
-    line-height: 1.45;
   }
 }
