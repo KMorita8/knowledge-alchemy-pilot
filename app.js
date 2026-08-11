@@ -1451,11 +1451,10 @@ function showStudyCompletion() {
   el('queryInput').readOnly = true;
 
   setGuide(
-    `<strong>きみの<ruby>本<rt>ほん</rt></ruby>さがしの<ruby>記録<rt>きろく</rt></ruby>ができたよ！</strong><br>` +
-    `この<ruby>画面<rt>がめん</rt></ruby>をスクショして、` +
-    `<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の` +
-    `<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`,
-    ''
+    `よくできたね！ <strong>${book.titleHtml}</strong> は、<strong>${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label}</strong> の<ruby>本棚<rt>ほんだな</rt></ruby>を<ruby>探<rt>さが</rt></ruby>してみよう。<br>` +
+    `さあ、この<ruby>画面<rt>がめん</rt></ruby>をスクショして、<ruby>実際<rt>じっさい</rt></ruby>の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！<br>` +
+    `<strong>これで<ruby>今回<rt>こんかい</rt></ruby>の<ruby>案内<rt>あんない</rt></ruby>はおしまいだよ。</strong>`,
+    `${ndc.n}<ruby>類<rt>るい</rt></ruby> ${ndc.label} の<ruby>本棚<rt>ほんだな</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってみよう！`
   );
 
   spawnSparkles(50);
