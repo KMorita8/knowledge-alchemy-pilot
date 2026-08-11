@@ -3986,7 +3986,7 @@ function bindEvents() {
     );
 
 
-  el('confirmNo')
+  el('confirmCancel')
     .addEventListener(
       'click',
       cancelFinal
@@ -4056,3 +4056,4 @@ document.addEventListener(
   'DOMContentLoaded',
   initializeApp
 );
+
